@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <meta name="theme-color" content="#FCE4EC">
-  <title>🎉 Revelación de Género - Andrés y María</title>
+  <title>🎉 Revelación de Género - Andrés y María José</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Playfair+Display:wght@400;700;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
@@ -148,8 +148,9 @@
     }
 
     .cursive-accent {
-      font-family: 'Dancing Script', cursive;
-      font-size: 36px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 28px;
+      font-weight: 700;
       background: linear-gradient(135deg, var(--pink-dark), var(--purple));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -311,8 +312,8 @@
     .scratch-section {
       position: relative;
       margin: 0 auto;
-      width: 290px;
-      height: 170px;
+      width: 100%;
+      height: 200px;
       border-radius: 20px;
       overflow: hidden;
       box-shadow:
@@ -334,9 +335,9 @@
       font-weight: 800;
       border-radius: 20px;
     }
-    .scratch-result .r-emoji { font-size: 48px; }
-    .scratch-result .r-text { font-size: 24px; font-family: 'Playfair Display', serif; }
-    .scratch-result .r-sub { font-size: 12px; font-weight: 400; opacity: 0.7; }
+    .scratch-result .r-emoji { font-size: 56px; }
+    .scratch-result .r-text { font-size: 36px; font-family: 'Poppins', sans-serif; font-weight: 900; text-shadow: 0 2px 10px rgba(0,0,0,0.15); }
+    .scratch-result .r-sub { font-size: 14px; font-weight: 500; opacity: 0.8; }
 
     .scratch-result.nino {
       background: linear-gradient(135deg, #E1F5FE, #B3E5FC, #81D4FA);
@@ -400,6 +401,132 @@
       margin-top: 28px;
       padding-top: 20px;
       border-top: 1px solid #f0f0f0;
+    }
+
+    /* === VOTING POLL === */
+    .poll-section {
+      margin-top: 28px;
+      padding: 20px 16px;
+      background: linear-gradient(135deg, #FFF8E1, #FFF3E0);
+      border-radius: 18px;
+      border: 1px solid rgba(255,215,0,0.2);
+    }
+    .poll-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #555;
+      margin-bottom: 4px;
+    }
+    .poll-subtitle {
+      font-size: 11px;
+      color: #999;
+      margin-bottom: 16px;
+    }
+    .poll-options {
+      display: flex;
+      gap: 12px;
+    }
+    .poll-btn {
+      flex: 1;
+      padding: 14px 10px;
+      border: 2.5px solid #eee;
+      border-radius: 14px;
+      background: white;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      font-family: 'Poppins', sans-serif;
+    }
+    .poll-btn:active { transform: scale(0.92); }
+    .poll-btn .pb-emoji { font-size: 32px; display: block; margin-bottom: 6px; }
+    .poll-btn .pb-label { font-size: 13px; font-weight: 600; color: #555; }
+    .poll-btn.voted-nino {
+      border-color: var(--blue);
+      background: #E1F5FE;
+      transform: scale(1.05);
+      box-shadow: 0 4px 15px rgba(79,195,247,0.3);
+    }
+    .poll-btn.voted-nina {
+      border-color: var(--pink);
+      background: #FCE4EC;
+      transform: scale(1.05);
+      box-shadow: 0 4px 15px rgba(244,143,177,0.3);
+    }
+    .poll-btn.not-voted { opacity: 0.5; transform: scale(0.95); }
+    .poll-result {
+      display: none;
+      margin-top: 14px;
+      padding: 10px;
+      border-radius: 10px;
+      background: white;
+      text-align: center;
+      font-size: 13px;
+      font-weight: 500;
+      color: #666;
+      animation: revealPop 0.5s ease;
+    }
+    .poll-result.show { display: block; }
+    .poll-bar {
+      height: 8px;
+      border-radius: 4px;
+      background: #eee;
+      margin-top: 8px;
+      overflow: hidden;
+      display: flex;
+    }
+    .poll-bar-blue {
+      height: 100%;
+      background: linear-gradient(90deg, var(--blue), var(--blue-dark));
+      transition: width 0.8s ease;
+    }
+    .poll-bar-pink {
+      height: 100%;
+      background: linear-gradient(90deg, var(--pink), var(--pink-dark));
+      transition: width 0.8s ease;
+    }
+
+    /* === MUSIC BUTTON === */
+    .music-btn {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: white;
+      border: none;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      font-size: 20px;
+      cursor: pointer;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+      animation: cardEnter 1s ease 0.5s both;
+    }
+    .music-btn:hover { transform: scale(1.1); }
+    .music-btn:active { transform: scale(0.9); }
+    .music-btn.playing {
+      animation: musicPulse 1s ease-in-out infinite;
+    }
+    @keyframes musicPulse {
+      0%, 100% { box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+      50% { box-shadow: 0 4px 20px rgba(206,147,216,0.4); }
+    }
+
+    /* === TOUCH SPARKLE === */
+    .sparkle {
+      position: fixed;
+      pointer-events: none;
+      font-size: 20px;
+      z-index: 9998;
+      animation: sparkleAnim 0.8s ease forwards;
+    }
+    @keyframes sparkleAnim {
+      0% { transform: scale(0) rotate(0deg); opacity: 1; }
+      50% { transform: scale(1.2) rotate(180deg); opacity: 0.8; }
+      100% { transform: scale(0) rotate(360deg) translateY(-30px); opacity: 0; }
     }
     .rsvp-text {
       font-size: 12px;
@@ -466,6 +593,9 @@
 </head>
 <body>
 
+<!-- Music toggle -->
+<button class="music-btn" id="music-btn" onclick="toggleMusic()">🎵</button>
+
 <div class="bg-pattern"></div>
 <div class="particles" id="particles"></div>
 
@@ -473,7 +603,7 @@
   <div class="card">
     <!-- Banner -->
     <div class="card-banner">
-      <span class="banner-emoji">👶✨</span>
+      <span class="banner-emoji" id="banner-emoji">👶✨</span>
     </div>
 
     <div class="card-body">
@@ -484,7 +614,7 @@
 
       <!-- Parents -->
       <div class="parents-section">
-        <div class="parents-name">Andrés y María</div>
+        <div class="parents-name">Andrés y María José</div>
         <div class="parents-label">están por descubrir la sorpresa más grande de sus vidas</div>
       </div>
 
@@ -505,12 +635,12 @@
         <div class="detail-card">
           <div class="dc-icon">🕐</div>
           <div class="dc-label">Hora</div>
-          <div class="dc-value">Por confirmar</div>
+          <div class="dc-value">2:00 PM</div>
         </div>
         <div class="detail-card full-width">
           <div class="dc-icon">📍</div>
           <div class="dc-label">Lugar</div>
-          <div class="dc-value">Chalco</div>
+          <div class="dc-value"><a href="https://maps.app.goo.gl/3zjqm98AYUWxZ7id7" target="_blank" style="color:#555;text-decoration:underline;">Tláhuac — Ver ubicación 📌</a></div>
         </div>
       </div>
 
@@ -525,30 +655,33 @@
         ¡Ven a descubrir con nosotros si nuestro bebé será niño o niña! Tu presencia hará este momento aún más especial. ¡No faltes!
       </div>
 
-      <!-- Scratch card -->
-      <div class="scratch-wrapper">
-        <div class="scratch-title">— ¿Quieres intentar adivinar? —</div>
-
-        <div class="scratch-section" id="scratch-section">
-          <div class="scratch-result misterio" id="scratch-result">
-            <span class="r-emoji" id="result-emoji">👶❓</span>
-            <span class="r-text" id="result-text">¿Será...?</span>
-            <span class="r-sub" id="result-sub">Descúbrelo en el evento</span>
-          </div>
-          <canvas id="scratch-canvas"></canvas>
+      <!-- Voting Poll -->
+      <div class="poll-section">
+        <div class="poll-title">🤔 ¿Tú qué crees que será?</div>
+        <div class="poll-subtitle">¡Vota y descúbrelo en el evento!</div>
+        <div class="poll-options">
+          <button class="poll-btn" id="vote-nino" onclick="vote('niño')">
+            <span class="pb-emoji">👦💙</span>
+            <span class="pb-label">Niño</span>
+          </button>
+          <button class="poll-btn" id="vote-nina" onclick="vote('niña')">
+            <span class="pb-emoji">👧💗</span>
+            <span class="pb-label">Niña</span>
+          </button>
         </div>
-
-        <p class="scratch-hint" id="scratch-hint">
-          <span class="finger">☝️</span> Rasca con tu dedo para descubrir
-        </p>
-
-        <div class="revealed-msg" id="revealed-msg"></div>
+        <div class="poll-result" id="poll-result">
+          <span id="poll-msg"></span>
+          <div class="poll-bar">
+            <div class="poll-bar-blue" id="poll-bar-blue" style="width:50%"></div>
+            <div class="poll-bar-pink" id="poll-bar-pink" style="width:50%"></div>
+          </div>
+        </div>
       </div>
 
       <!-- RSVP -->
       <div class="rsvp-section">
         <p class="rsvp-text">¿Nos confirmas tu asistencia?</p>
-        <a class="rsvp-btn" href="https://wa.me/5215500000000?text=¡Hola!%20Confirmo%20mi%20asistencia%20a%20la%20revelación%20de%20género%20🎉" target="_blank">
+        <a class="rsvp-btn" id="rsvp-btn" href="#" onclick="confirmAttendance(event)" target="_blank">
           💬 Confirmar por WhatsApp
         </a>
       </div>
@@ -575,6 +708,22 @@ const GENERO = "misterio";
 // ============================================================
 
 (function() {
+
+  // === BANNER EMOJI ROTATION ===
+  const bannerEmojis = ['👶✨','👧💗','👦💙','🍼✨','🎀🎉','👶🌟'];
+  let emojiIndex = 0;
+  const bannerEl = document.getElementById('banner-emoji');
+  setInterval(() => {
+    bannerEl.style.transition = 'transform 0.3s, opacity 0.3s';
+    bannerEl.style.transform = 'scale(0.5)';
+    bannerEl.style.opacity = '0';
+    setTimeout(() => {
+      emojiIndex = (emojiIndex + 1) % bannerEmojis.length;
+      bannerEl.textContent = bannerEmojis[emojiIndex];
+      bannerEl.style.transform = 'scale(1)';
+      bannerEl.style.opacity = '1';
+    }, 300);
+  }, 2500);
 
   // === FLOATING PARTICLES ===
   const particleIcons = ['🍼','🧸','⭐','🎀','🌙','✨','💫','🎈','👣','🦋','💝','🌸'];
@@ -611,147 +760,6 @@ const GENERO = "misterio";
   }
   updateCountdown();
   setInterval(updateCountdown, 1000);
-
-  // === SCRATCH CARD ===
-  const section = document.getElementById('scratch-section');
-  const canvas = document.getElementById('scratch-canvas');
-  const ctx = canvas.getContext('2d');
-  const resultDiv = document.getElementById('scratch-result');
-  const resultEmoji = document.getElementById('result-emoji');
-  const resultText = document.getElementById('result-text');
-  const resultSub = document.getElementById('result-sub');
-  const hint = document.getElementById('scratch-hint');
-  const revealedMsg = document.getElementById('revealed-msg');
-
-  // Configure result
-  if (GENERO === "niño") {
-    resultDiv.className = 'scratch-result nino';
-    resultEmoji.textContent = '👦💙';
-    resultText.textContent = '¡Es niño!';
-    resultSub.textContent = '¡Un príncipe viene en camino!';
-  } else if (GENERO === "niña") {
-    resultDiv.className = 'scratch-result nina';
-    resultEmoji.textContent = '👧💗';
-    resultText.textContent = '¡Es niña!';
-    resultSub.textContent = '¡Una princesa viene en camino!';
-  } else {
-    resultDiv.className = 'scratch-result misterio';
-    resultEmoji.textContent = '🤫✨';
-    resultText.textContent = '¿Será...?';
-    resultSub.textContent = '¡Lo sabrás en el evento!';
-  }
-
-  // Canvas setup
-  const rect = section.getBoundingClientRect();
-  const dpr = window.devicePixelRatio || 1;
-  canvas.width = rect.width * dpr;
-  canvas.height = rect.height * dpr;
-  canvas.style.width = rect.width + 'px';
-  canvas.style.height = rect.height + 'px';
-  ctx.scale(dpr, dpr);
-
-  // Draw metallic scratch cover
-  function drawCover() {
-    const w = rect.width, h = rect.height;
-    // Metallic gradient
-    const g = ctx.createLinearGradient(0, 0, w, h);
-    g.addColorStop(0, '#BDBDBD');
-    g.addColorStop(0.2, '#E0E0E0');
-    g.addColorStop(0.35, '#EEEEEE');
-    g.addColorStop(0.5, '#F5F5F5');
-    g.addColorStop(0.65, '#EEEEEE');
-    g.addColorStop(0.8, '#D4D4D4');
-    g.addColorStop(1, '#9E9E9E');
-    ctx.fillStyle = g;
-    ctx.fillRect(0, 0, w, h);
-
-    // Shimmer lines
-    ctx.strokeStyle = 'rgba(255,255,255,0.5)';
-    ctx.lineWidth = 0.5;
-    for (let i = -h; i < w + h; i += 12) {
-      ctx.beginPath();
-      ctx.moveTo(i, 0);
-      ctx.lineTo(i - h, h);
-      ctx.stroke();
-    }
-
-    // Question marks
-    ctx.fillStyle = 'rgba(0,0,0,0.05)';
-    ctx.font = 'bold 20px Poppins, sans-serif';
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    for (let x = 20; x < w; x += 40) {
-      for (let y = 20; y < h; y += 32) {
-        ctx.fillText('?', x + ((y/32) % 2 === 0 ? 10 : 0), y);
-      }
-    }
-
-    // Center text
-    ctx.fillStyle = 'rgba(0,0,0,0.18)';
-    ctx.font = '700 13px Poppins, sans-serif';
-    ctx.fillText('✨ RASCA AQUÍ ✨', w/2, h/2);
-  }
-  drawCover();
-
-  // Scratch interaction
-  let isScratching = false;
-  let revealed = false;
-
-  function getPos(e) {
-    const r = canvas.getBoundingClientRect();
-    if (e.touches && e.touches.length > 0)
-      return { x: e.touches[0].clientX - r.left, y: e.touches[0].clientY - r.top };
-    return { x: e.clientX - r.left, y: e.clientY - r.top };
-  }
-
-  function scratch(x, y) {
-    ctx.globalCompositeOperation = 'destination-out';
-    ctx.beginPath();
-    ctx.arc(x, y, 24, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.globalCompositeOperation = 'source-over';
-  }
-
-  function checkReveal() {
-    if (revealed) return;
-    const img = ctx.getImageData(0, 0, canvas.width, canvas.height);
-    let clear = 0;
-    const total = img.data.length / 4;
-    // Sample every 4th pixel for performance
-    for (let i = 3; i < img.data.length; i += 16) {
-      if (img.data[i] === 0) clear++;
-    }
-    if (clear / (total / 4) > 0.28) {
-      revealed = true;
-      canvas.style.transition = 'opacity 0.6s ease';
-      canvas.style.opacity = '0';
-      hint.style.opacity = '0';
-
-      if (GENERO === "niño") {
-        revealedMsg.textContent = '💙 ¡Felicidades! ¡Viene un niño! 💙';
-        revealedMsg.className = 'revealed-msg show nino';
-        fireConfetti();
-      } else if (GENERO === "niña") {
-        revealedMsg.textContent = '💗 ¡Felicidades! ¡Viene una niña! 💗';
-        revealedMsg.className = 'revealed-msg show nina';
-        fireConfetti();
-      } else {
-        revealedMsg.textContent = '🤫 ¡La gran sorpresa será en el evento! ¡Te esperamos!';
-        revealedMsg.className = 'revealed-msg show misterio';
-      }
-    }
-  }
-
-  // Mouse
-  canvas.addEventListener('mousedown', e => { isScratching = true; const p = getPos(e); scratch(p.x, p.y); });
-  canvas.addEventListener('mousemove', e => { if (isScratching) { const p = getPos(e); scratch(p.x, p.y); } });
-  canvas.addEventListener('mouseup', () => { isScratching = false; checkReveal(); });
-  canvas.addEventListener('mouseleave', () => { if (isScratching) { isScratching = false; checkReveal(); } });
-
-  // Touch
-  canvas.addEventListener('touchstart', e => { e.preventDefault(); isScratching = true; const p = getPos(e); scratch(p.x, p.y); }, {passive:false});
-  canvas.addEventListener('touchmove', e => { e.preventDefault(); if (isScratching) { const p = getPos(e); scratch(p.x, p.y); } }, {passive:false});
-  canvas.addEventListener('touchend', e => { e.preventDefault(); isScratching = false; checkReveal(); });
 
   // === CONFETTI ===
   function fireConfetti() {
@@ -843,6 +851,118 @@ const GENERO = "misterio";
   }
 
 })();
+
+// === VOTING POLL ===
+let voted = localStorage.getItem('genderVote');
+if (voted) showVoteResult(voted);
+
+function vote(choice) {
+  if (voted) return;
+  voted = choice;
+  localStorage.setItem('genderVote', choice);
+
+  const ninoBtn = document.getElementById('vote-nino');
+  const ninaBtn = document.getElementById('vote-nina');
+
+  if (choice === 'niño') {
+    ninoBtn.classList.add('voted-nino');
+    ninaBtn.classList.add('not-voted');
+  } else {
+    ninaBtn.classList.add('voted-nina');
+    ninoBtn.classList.add('not-voted');
+  }
+
+  // Simulate random "results" (just for fun, no real backend)
+  setTimeout(() => showVoteResult(choice), 500);
+}
+
+function showVoteResult(choice) {
+  const result = document.getElementById('poll-result');
+  const msg = document.getElementById('poll-msg');
+  const barBlue = document.getElementById('poll-bar-blue');
+  const barPink = document.getElementById('poll-bar-pink');
+
+  // Generate fun random percentages
+  const seed = (choice === 'niño') ? 55 + Math.floor(Math.random() * 10) : 40 + Math.floor(Math.random() * 10);
+  const bluePercent = choice === 'niño' ? seed : (100 - seed);
+  const pinkPercent = 100 - bluePercent;
+
+  msg.textContent = choice === 'niño'
+    ? '¡Votaste por niño! 💙 Veamos quién tiene razón...'
+    : '¡Votaste por niña! 💗 Veamos quién tiene razón...';
+  barBlue.style.width = bluePercent + '%';
+  barPink.style.width = pinkPercent + '%';
+  result.classList.add('show');
+
+  // Update buttons if reloading
+  const ninoBtn = document.getElementById('vote-nino');
+  const ninaBtn = document.getElementById('vote-nina');
+  if (choice === 'niño') {
+    ninoBtn.classList.add('voted-nino');
+    ninaBtn.classList.add('not-voted');
+  } else {
+    ninaBtn.classList.add('voted-nina');
+    ninoBtn.classList.add('not-voted');
+  }
+}
+
+// === MUSIC (audio file) ===
+let musicPlaying = false;
+let audioEl = null;
+
+function toggleMusic() {
+  const btn = document.getElementById('music-btn');
+
+  if (!audioEl) {
+    audioEl = new Audio('musica.mp3');
+    audioEl.loop = true;
+    audioEl.volume = 0.4;
+  }
+
+  if (musicPlaying) {
+    audioEl.pause();
+    btn.textContent = '🎵';
+    btn.classList.remove('playing');
+  } else {
+    audioEl.play().catch(() => {
+      // Browser blocked autoplay, user needs to tap again
+    });
+    btn.textContent = '🔊';
+    btn.classList.add('playing');
+  }
+  musicPlaying = !musicPlaying;
+}
+
+function stopMusic() {
+  if (audioEl) { audioEl.pause(); audioEl = null; }
+  musicPlaying = false;
+}
+
+// === CONFIRM ATTENDANCE VIA WHATSAPP ===
+function confirmAttendance(e) {
+  e.preventDefault();
+  const myVote = localStorage.getItem('genderVote');
+  let msg = '¡Hola! Confirmo mi asistencia a la revelación de género';
+  if (myVote === 'niño') {
+    msg += ' y creo que será niño';
+  } else if (myVote === 'niña') {
+    msg += ' y creo que será niña';
+  }
+  const url = 'https://wa.me/525591640685?text=' + encodeURIComponent(msg);
+  window.open(url, '_blank');
+}
+
+// === TOUCH SPARKLES ===
+document.addEventListener('click', function(e) {
+  const sparkles = ['✨','⭐','💫','🌟','💖'];
+  const spark = document.createElement('div');
+  spark.className = 'sparkle';
+  spark.textContent = sparkles[Math.floor(Math.random() * sparkles.length)];
+  spark.style.left = e.clientX - 10 + 'px';
+  spark.style.top = e.clientY - 10 + 'px';
+  document.body.appendChild(spark);
+  setTimeout(() => spark.remove(), 800);
+});
 </script>
 </body>
 </html>
