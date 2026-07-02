@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#FCE4EC">
+  <title>🎉 Revelación de Género - Andrés y María</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Playfair+Display:wght@400;700;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --pink: #F48FB1;
+      --pink-dark: #E91E63;
+      --blue: #4FC3F7;
+      --blue-dark: #0288D1;
+      --purple: #CE93D8;
+      --gold: #FFD700;
+      --cream: #FFF8F0;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: var(--cream);
+      padding: 0;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* === BACKGROUND PATTERN === */
+    .bg-pattern {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-image:
+        radial-gradient(circle at 15% 20%, rgba(244,143,177,0.08) 0%, transparent 50%),
+        radial-gradient(circle at 85% 30%, rgba(79,195,247,0.08) 0%, transparent 50%),
+        radial-gradient(circle at 50% 80%, rgba(206,147,216,0.06) 0%, transparent 40%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* === PARTICLES === */
+    .particles {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .particles span {
+      position: absolute;
+      display: block;
+      animation: particleFloat linear infinite;
+      opacity: 0;
+    }
+    @keyframes particleFloat {
+      0% { transform: translateY(100vh) rotate(0deg) scale(0.5); opacity: 0; }
+      5% { opacity: 1; }
+      95% { opacity: 1; }
+      100% { transform: translateY(-10vh) rotate(720deg) scale(1); opacity: 0; }
+    }
+
+    /* === MAIN CARD === */
+    .card-wrapper {
+      width: 100%;
+      max-width: 420px;
+      padding: 24px 16px 32px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .card {
+      background: white;
+      border-radius: 32px;
+      padding: 0;
+      box-shadow:
+        0 25px 80px rgba(233,30,99,0.08),
+        0 10px 30px rgba(0,0,0,0.06);
+      overflow: hidden;
+      animation: cardEnter 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      opacity: 0;
+    }
+
+    @keyframes cardEnter {
+      from { opacity: 0; transform: translateY(40px) scale(0.92); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    /* Top decorative banner */
+    .card-banner {
+      height: 120px;
+      background: linear-gradient(135deg, #FCE4EC 0%, #F8BBD0 30%, #CE93D8 60%, #B3E5FC 100%);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card-banner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.15'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    .banner-emoji {
+      font-size: 52px;
+      position: relative;
+      z-index: 1;
+      animation: gentleBounce 3s ease-in-out infinite;
+      text-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+
+    @keyframes gentleBounce {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-6px) scale(1.05); }
+    }
+
+    /* Card body */
+    .card-body {
+      padding: 28px 24px 32px;
+      text-align: center;
+    }
+
+    .event-type {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: var(--purple);
+      margin-bottom: 4px;
+    }
+
+    .main-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      font-weight: 900;
+      color: #333;
+      line-height: 1.2;
+      margin-bottom: 6px;
+    }
+
+    .cursive-accent {
+      font-family: 'Dancing Script', cursive;
+      font-size: 36px;
+      background: linear-gradient(135deg, var(--pink-dark), var(--purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      display: block;
+      margin: 4px 0 16px;
+    }
+
+    /* Parents section */
+    .parents-section {
+      margin-bottom: 24px;
+    }
+    .parents-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: #444;
+    }
+    .parents-label {
+      font-size: 12px;
+      color: #bbb;
+      margin-top: 2px;
+      font-weight: 400;
+    }
+
+    /* Decorative divider */
+    .ornament {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin: 20px 0;
+      color: #ddd;
+    }
+    .ornament-line {
+      width: 40px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #ddd, transparent);
+    }
+    .ornament-icon { font-size: 14px; color: var(--purple); opacity: 0.6; }
+
+    /* Event details */
+    .details-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .detail-card {
+      background: #FAFAFA;
+      border-radius: 14px;
+      padding: 14px 12px;
+      transition: transform 0.2s;
+    }
+    .detail-card:hover { transform: translateY(-2px); }
+    .detail-card .dc-icon { font-size: 22px; margin-bottom: 6px; }
+    .detail-card .dc-label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #bbb;
+      margin-bottom: 2px;
+    }
+    .detail-card .dc-value {
+      font-size: 13px;
+      font-weight: 600;
+      color: #555;
+    }
+    .detail-card.full-width {
+      grid-column: 1 / -1;
+    }
+
+    /* Countdown */
+    .countdown-section {
+      margin: 24px 0;
+      padding: 20px 16px;
+      background: linear-gradient(135deg, #FFF0F5, #F3E5F5, #E8F5FE);
+      border-radius: 20px;
+      border: 1px solid rgba(206,147,216,0.15);
+    }
+    .countdown-title {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #999;
+      margin-bottom: 14px;
+    }
+    .countdown {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+    .cd-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .cd-num {
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      font-weight: 700;
+      color: white;
+      background: linear-gradient(135deg, var(--pink), var(--purple));
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(206,147,216,0.3);
+    }
+    .cd-label {
+      font-size: 9px;
+      color: #aaa;
+      margin-top: 5px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 500;
+    }
+
+    /* Message */
+    .message-box {
+      position: relative;
+      padding: 16px 20px;
+      background: white;
+      border: 1.5px solid rgba(206,147,216,0.2);
+      border-radius: 16px;
+      margin: 20px 0 28px;
+      font-style: italic;
+      color: #666;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+    .message-box::before {
+      content: '"';
+      position: absolute;
+      top: -14px;
+      left: 16px;
+      font-size: 40px;
+      font-family: 'Playfair Display', serif;
+      color: var(--purple);
+      opacity: 0.3;
+      line-height: 1;
+    }
+
+    /* === SCRATCH CARD === */
+    .scratch-wrapper {
+      margin-top: 8px;
+    }
+    .scratch-title {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: #ccc;
+      margin-bottom: 14px;
+    }
+
+    .scratch-section {
+      position: relative;
+      margin: 0 auto;
+      width: 290px;
+      height: 170px;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow:
+        0 10px 30px rgba(0,0,0,0.1),
+        0 2px 8px rgba(0,0,0,0.06),
+        inset 0 0 0 1px rgba(0,0,0,0.04);
+      touch-action: none;
+      cursor: crosshair;
+    }
+
+    .scratch-result {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-weight: 800;
+      border-radius: 20px;
+    }
+    .scratch-result .r-emoji { font-size: 48px; }
+    .scratch-result .r-text { font-size: 24px; font-family: 'Playfair Display', serif; }
+    .scratch-result .r-sub { font-size: 12px; font-weight: 400; opacity: 0.7; }
+
+    .scratch-result.nino {
+      background: linear-gradient(135deg, #E1F5FE, #B3E5FC, #81D4FA);
+      color: #01579B;
+    }
+    .scratch-result.nina {
+      background: linear-gradient(135deg, #FCE4EC, #F8BBD0, #F48FB1);
+      color: #880E4F;
+    }
+    .scratch-result.misterio {
+      background: linear-gradient(135deg, #F5F5F5, #EEEEEE, #E0E0E0);
+      color: #555;
+    }
+
+    #scratch-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 20px;
+    }
+
+    .scratch-hint {
+      margin-top: 14px;
+      font-size: 13px;
+      color: #aaa;
+      transition: all 0.4s;
+    }
+    .scratch-hint .finger {
+      display: inline-block;
+      animation: fingerWiggle 1.8s ease-in-out infinite;
+    }
+    @keyframes fingerWiggle {
+      0%,100% { transform: translateX(0) rotate(0); }
+      25% { transform: translateX(6px) rotate(5deg); }
+      75% { transform: translateX(-6px) rotate(-5deg); }
+    }
+
+    /* Revealed text */
+    .revealed-msg {
+      display: none;
+      margin-top: 20px;
+      padding: 14px 20px;
+      border-radius: 14px;
+      font-weight: 600;
+      font-size: 15px;
+      animation: revealPop 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .revealed-msg.show { display: block; }
+    .revealed-msg.nino { background: #E1F5FE; color: #01579B; }
+    .revealed-msg.nina { background: #FCE4EC; color: #880E4F; }
+    .revealed-msg.misterio { background: #F5F5F5; color: #555; }
+
+    @keyframes revealPop {
+      from { opacity: 0; transform: scale(0.8) translateY(10px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    /* RSVP section */
+    .rsvp-section {
+      margin-top: 28px;
+      padding-top: 20px;
+      border-top: 1px solid #f0f0f0;
+    }
+    .rsvp-text {
+      font-size: 12px;
+      color: #999;
+      margin-bottom: 10px;
+    }
+    .rsvp-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      background: linear-gradient(135deg, #25D366, #128C7E);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      font-size: 14px;
+      font-weight: 600;
+      font-family: 'Poppins', sans-serif;
+      cursor: pointer;
+      text-decoration: none;
+      box-shadow: 0 4px 15px rgba(37,211,102,0.3);
+      transition: all 0.2s;
+    }
+    .rsvp-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(37,211,102,0.4); }
+    .rsvp-btn:active { transform: scale(0.96); }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 20px 16px 32px;
+      position: relative;
+      z-index: 1;
+    }
+    .footer-text {
+      font-size: 11px;
+      color: #ccc;
+    }
+    .footer-hearts {
+      margin-top: 8px;
+      font-size: 10px;
+      letter-spacing: 4px;
+      opacity: 0.4;
+    }
+
+    /* Confetti canvas */
+    #confetti-canvas {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* Responsive */
+    @media (max-width: 360px) {
+      .card-body { padding: 24px 16px 28px; }
+      .scratch-section { width: 250px; height: 150px; }
+      .main-title { font-size: 24px; }
+      .cursive-accent { font-size: 30px; }
+      .cd-num { width: 42px; height: 42px; font-size: 18px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="bg-pattern"></div>
+<div class="particles" id="particles"></div>
+
+<div class="card-wrapper">
+  <div class="card">
+    <!-- Banner -->
+    <div class="card-banner">
+      <span class="banner-emoji">👶✨</span>
+    </div>
+
+    <div class="card-body">
+      <!-- Header -->
+      <div class="event-type">Te invitamos a nuestra</div>
+      <h1 class="main-title">Revelación de Género</h1>
+      <span class="cursive-accent">¿Niño o Niña?</span>
+
+      <!-- Parents -->
+      <div class="parents-section">
+        <div class="parents-name">Andrés y María</div>
+        <div class="parents-label">están por descubrir la sorpresa más grande de sus vidas</div>
+      </div>
+
+      <!-- Ornament -->
+      <div class="ornament">
+        <span class="ornament-line"></span>
+        <span class="ornament-icon">✦</span>
+        <span class="ornament-line"></span>
+      </div>
+
+      <!-- Details -->
+      <div class="details-grid">
+        <div class="detail-card">
+          <div class="dc-icon">📅</div>
+          <div class="dc-label">Fecha</div>
+          <div class="dc-value">26 de Julio, 2026</div>
+        </div>
+        <div class="detail-card">
+          <div class="dc-icon">🕐</div>
+          <div class="dc-label">Hora</div>
+          <div class="dc-value">Por confirmar</div>
+        </div>
+        <div class="detail-card full-width">
+          <div class="dc-icon">📍</div>
+          <div class="dc-label">Lugar</div>
+          <div class="dc-value">Chalco</div>
+        </div>
+      </div>
+
+      <!-- Countdown -->
+      <div class="countdown-section">
+        <div class="countdown-title">⏳ Faltan</div>
+        <div class="countdown" id="countdown"></div>
+      </div>
+
+      <!-- Message -->
+      <div class="message-box">
+        ¡Ven a descubrir con nosotros si nuestro bebé será niño o niña! Tu presencia hará este momento aún más especial. ¡No faltes!
+      </div>
+
+      <!-- Scratch card -->
+      <div class="scratch-wrapper">
+        <div class="scratch-title">— ¿Quieres intentar adivinar? —</div>
+
+        <div class="scratch-section" id="scratch-section">
+          <div class="scratch-result misterio" id="scratch-result">
+            <span class="r-emoji" id="result-emoji">👶❓</span>
+            <span class="r-text" id="result-text">¿Será...?</span>
+            <span class="r-sub" id="result-sub">Descúbrelo en el evento</span>
+          </div>
+          <canvas id="scratch-canvas"></canvas>
+        </div>
+
+        <p class="scratch-hint" id="scratch-hint">
+          <span class="finger">☝️</span> Rasca con tu dedo para descubrir
+        </p>
+
+        <div class="revealed-msg" id="revealed-msg"></div>
+      </div>
+
+      <!-- RSVP -->
+      <div class="rsvp-section">
+        <p class="rsvp-text">¿Nos confirmas tu asistencia?</p>
+        <a class="rsvp-btn" href="https://wa.me/5215500000000?text=¡Hola!%20Confirmo%20mi%20asistencia%20a%20la%20revelación%20de%20género%20🎉" target="_blank">
+          💬 Confirmar por WhatsApp
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <p class="footer-text">Hecho con amor para un momento inolvidable</p>
+  <p class="footer-hearts">💕 💕 💕</p>
+</div>
+
+<canvas id="confetti-canvas"></canvas>
+
+<script>
+// ============================================================
+// 🔒 CONFIGURACIÓN SECRETA
+// Solo la persona que conoce el resultado (doctor, familiar)
+// debe cambiar esta línea. Nadie más debe tocarla.
+// Opciones: "niño", "niña", o "misterio"
+// Con "misterio" no se revela nada — dice que la sorpresa es en el evento.
+// ============================================================
+const GENERO = "misterio";
+// ============================================================
+
+(function() {
+
+  // === FLOATING PARTICLES ===
+  const particleIcons = ['🍼','🧸','⭐','🎀','🌙','✨','💫','🎈','👣','🦋','💝','🌸'];
+  const particlesDiv = document.getElementById('particles');
+  for (let i = 0; i < 15; i++) {
+    const span = document.createElement('span');
+    span.textContent = particleIcons[Math.floor(Math.random() * particleIcons.length)];
+    span.style.left = Math.random() * 100 + '%';
+    span.style.fontSize = (14 + Math.random() * 14) + 'px';
+    span.style.animationDuration = (12 + Math.random() * 18) + 's';
+    span.style.animationDelay = (Math.random() * 15) + 's';
+    particlesDiv.appendChild(span);
+  }
+
+  // === COUNTDOWN ===
+  const eventDate = new Date('2026-07-26T00:00:00');
+  function updateCountdown() {
+    const now = new Date();
+    const diff = eventDate - now;
+    const el = document.getElementById('countdown');
+    if (diff <= 0) {
+      el.innerHTML = '<span style="font-size:15px;font-weight:600;color:var(--purple);">🎉 ¡Hoy es el gran día! 🎉</span>';
+      return;
+    }
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+    el.innerHTML = `
+      <div class="cd-item"><div class="cd-num">${d}</div><div class="cd-label">Días</div></div>
+      <div class="cd-item"><div class="cd-num">${h}</div><div class="cd-label">Hrs</div></div>
+      <div class="cd-item"><div class="cd-num">${m}</div><div class="cd-label">Min</div></div>
+      <div class="cd-item"><div class="cd-num">${s}</div><div class="cd-label">Seg</div></div>`;
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+
+  // === SCRATCH CARD ===
+  const section = document.getElementById('scratch-section');
+  const canvas = document.getElementById('scratch-canvas');
+  const ctx = canvas.getContext('2d');
+  const resultDiv = document.getElementById('scratch-result');
+  const resultEmoji = document.getElementById('result-emoji');
+  const resultText = document.getElementById('result-text');
+  const resultSub = document.getElementById('result-sub');
+  const hint = document.getElementById('scratch-hint');
+  const revealedMsg = document.getElementById('revealed-msg');
+
+  // Configure result
+  if (GENERO === "niño") {
+    resultDiv.className = 'scratch-result nino';
+    resultEmoji.textContent = '👦💙';
+    resultText.textContent = '¡Es niño!';
+    resultSub.textContent = '¡Un príncipe viene en camino!';
+  } else if (GENERO === "niña") {
+    resultDiv.className = 'scratch-result nina';
+    resultEmoji.textContent = '👧💗';
+    resultText.textContent = '¡Es niña!';
+    resultSub.textContent = '¡Una princesa viene en camino!';
+  } else {
+    resultDiv.className = 'scratch-result misterio';
+    resultEmoji.textContent = '🤫✨';
+    resultText.textContent = '¿Será...?';
+    resultSub.textContent = '¡Lo sabrás en el evento!';
+  }
+
+  // Canvas setup
+  const rect = section.getBoundingClientRect();
+  const dpr = window.devicePixelRatio || 1;
+  canvas.width = rect.width * dpr;
+  canvas.height = rect.height * dpr;
+  canvas.style.width = rect.width + 'px';
+  canvas.style.height = rect.height + 'px';
+  ctx.scale(dpr, dpr);
+
+  // Draw metallic scratch cover
+  function drawCover() {
+    const w = rect.width, h = rect.height;
+    // Metallic gradient
+    const g = ctx.createLinearGradient(0, 0, w, h);
+    g.addColorStop(0, '#BDBDBD');
+    g.addColorStop(0.2, '#E0E0E0');
+    g.addColorStop(0.35, '#EEEEEE');
+    g.addColorStop(0.5, '#F5F5F5');
+    g.addColorStop(0.65, '#EEEEEE');
+    g.addColorStop(0.8, '#D4D4D4');
+    g.addColorStop(1, '#9E9E9E');
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, w, h);
+
+    // Shimmer lines
+    ctx.strokeStyle = 'rgba(255,255,255,0.5)';
+    ctx.lineWidth = 0.5;
+    for (let i = -h; i < w + h; i += 12) {
+      ctx.beginPath();
+      ctx.moveTo(i, 0);
+      ctx.lineTo(i - h, h);
+      ctx.stroke();
+    }
+
+    // Question marks
+    ctx.fillStyle = 'rgba(0,0,0,0.05)';
+    ctx.font = 'bold 20px Poppins, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    for (let x = 20; x < w; x += 40) {
+      for (let y = 20; y < h; y += 32) {
+        ctx.fillText('?', x + ((y/32) % 2 === 0 ? 10 : 0), y);
+      }
+    }
+
+    // Center text
+    ctx.fillStyle = 'rgba(0,0,0,0.18)';
+    ctx.font = '700 13px Poppins, sans-serif';
+    ctx.fillText('✨ RASCA AQUÍ ✨', w/2, h/2);
+  }
+  drawCover();
+
+  // Scratch interaction
+  let isScratching = false;
+  let revealed = false;
+
+  function getPos(e) {
+    const r = canvas.getBoundingClientRect();
+    if (e.touches && e.touches.length > 0)
+      return { x: e.touches[0].clientX - r.left, y: e.touches[0].clientY - r.top };
+    return { x: e.clientX - r.left, y: e.clientY - r.top };
+  }
+
+  function scratch(x, y) {
+    ctx.globalCompositeOperation = 'destination-out';
+    ctx.beginPath();
+    ctx.arc(x, y, 24, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.globalCompositeOperation = 'source-over';
+  }
+
+  function checkReveal() {
+    if (revealed) return;
+    const img = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    let clear = 0;
+    const total = img.data.length / 4;
+    // Sample every 4th pixel for performance
+    for (let i = 3; i < img.data.length; i += 16) {
+      if (img.data[i] === 0) clear++;
+    }
+    if (clear / (total / 4) > 0.28) {
+      revealed = true;
+      canvas.style.transition = 'opacity 0.6s ease';
+      canvas.style.opacity = '0';
+      hint.style.opacity = '0';
+
+      if (GENERO === "niño") {
+        revealedMsg.textContent = '💙 ¡Felicidades! ¡Viene un niño! 💙';
+        revealedMsg.className = 'revealed-msg show nino';
+        fireConfetti();
+      } else if (GENERO === "niña") {
+        revealedMsg.textContent = '💗 ¡Felicidades! ¡Viene una niña! 💗';
+        revealedMsg.className = 'revealed-msg show nina';
+        fireConfetti();
+      } else {
+        revealedMsg.textContent = '🤫 ¡La gran sorpresa será en el evento! ¡Te esperamos!';
+        revealedMsg.className = 'revealed-msg show misterio';
+      }
+    }
+  }
+
+  // Mouse
+  canvas.addEventListener('mousedown', e => { isScratching = true; const p = getPos(e); scratch(p.x, p.y); });
+  canvas.addEventListener('mousemove', e => { if (isScratching) { const p = getPos(e); scratch(p.x, p.y); } });
+  canvas.addEventListener('mouseup', () => { isScratching = false; checkReveal(); });
+  canvas.addEventListener('mouseleave', () => { if (isScratching) { isScratching = false; checkReveal(); } });
+
+  // Touch
+  canvas.addEventListener('touchstart', e => { e.preventDefault(); isScratching = true; const p = getPos(e); scratch(p.x, p.y); }, {passive:false});
+  canvas.addEventListener('touchmove', e => { e.preventDefault(); if (isScratching) { const p = getPos(e); scratch(p.x, p.y); } }, {passive:false});
+  canvas.addEventListener('touchend', e => { e.preventDefault(); isScratching = false; checkReveal(); });
+
+  // === CONFETTI ===
+  function fireConfetti() {
+    const c = document.getElementById('confetti-canvas');
+    const cx = c.getContext('2d');
+    c.width = window.innerWidth;
+    c.height = window.innerHeight;
+
+    const colors = GENERO === "niño"
+      ? ['#4FC3F7','#0288D1','#B3E5FC','#81D4FA','#E1F5FE','#BBDEFB','#FFF']
+      : ['#F48FB1','#E91E63','#FCE4EC','#F06292','#FF80AB','#F8BBD0','#FFF'];
+
+    const particles = [];
+    // Burst from center
+    for (let i = 0; i < 250; i++) {
+      const angle = Math.random() * Math.PI * 2;
+      const speed = Math.random() * 14 + 3;
+      particles.push({
+        x: c.width / 2, y: c.height * 0.5,
+        vx: Math.cos(angle) * speed,
+        vy: Math.sin(angle) * speed - 4,
+        size: Math.random() * 9 + 3,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        rot: Math.random() * 360,
+        rotV: (Math.random() - 0.5) * 18,
+        shape: Math.floor(Math.random() * 4), // 0=rect, 1=circle, 2=star, 3=heart
+        gravity: 0.12 + Math.random() * 0.08,
+        drag: 0.98 + Math.random() * 0.015
+      });
+    }
+
+    let frame = 0;
+    const max = 220;
+
+    function draw() {
+      frame++;
+      if (frame > max) { cx.clearRect(0, 0, c.width, c.height); return; }
+      cx.clearRect(0, 0, c.width, c.height);
+
+      for (const p of particles) {
+        p.vx *= p.drag;
+        p.vy += p.gravity;
+        p.x += p.vx;
+        p.y += p.vy;
+        p.rot += p.rotV;
+
+        const alpha = frame > max - 50 ? (max - frame) / 50 : 1;
+        cx.save();
+        cx.translate(p.x, p.y);
+        cx.rotate(p.rot * Math.PI / 180);
+        cx.globalAlpha = alpha;
+        cx.fillStyle = p.color;
+
+        if (p.shape === 0) {
+          cx.fillRect(-p.size/2, -p.size/3, p.size, p.size * 0.6);
+        } else if (p.shape === 1) {
+          cx.beginPath(); cx.arc(0, 0, p.size/2, 0, Math.PI*2); cx.fill();
+        } else if (p.shape === 2) {
+          drawStar(cx, 0, 0, 5, p.size/2, p.size/4);
+        } else {
+          drawHeart(cx, 0, 0, p.size * 0.8);
+        }
+        cx.restore();
+      }
+      requestAnimationFrame(draw);
+    }
+    draw();
+  }
+
+  function drawStar(cx, x, y, spikes, outer, inner) {
+    cx.beginPath();
+    for (let i = 0; i < spikes * 2; i++) {
+      const r = i % 2 === 0 ? outer : inner;
+      const a = (i * Math.PI) / spikes - Math.PI / 2;
+      cx.lineTo(x + Math.cos(a) * r, y + Math.sin(a) * r);
+    }
+    cx.closePath(); cx.fill();
+  }
+
+  function drawHeart(cx, x, y, size) {
+    const s = size / 4;
+    cx.beginPath();
+    cx.moveTo(x, y + s);
+    cx.bezierCurveTo(x, y - s, x - 2*s, y - s, x - 2*s, y);
+    cx.bezierCurveTo(x - 2*s, y + s*1.5, x, y + 2.5*s, x, y + 3*s);
+    cx.bezierCurveTo(x, y + 2.5*s, x + 2*s, y + s*1.5, x + 2*s, y);
+    cx.bezierCurveTo(x + 2*s, y - s, x, y - s, x, y + s);
+    cx.fill();
+  }
+
+})();
+</script>
+</body>
+</html>
