@@ -608,14 +608,14 @@
 
     <div class="card-body">
       <!-- Header -->
-      <div class="event-type">Te invitamos a nuestra</div>
-      <h1 class="main-title">Revelación de Género</h1>
-      <span class="cursive-accent">¿Niño o Niña?</span>
+      <div class="event-type" id="event-type-text">Te invitamos a nuestra</div>
+      <h1 class="main-title" id="main-title-text">Revelación de Género</h1>
+      <span class="cursive-accent" id="cursive-text">¿Niño o Niña?</span>
 
       <!-- Parents -->
       <div class="parents-section">
         <div class="parents-name">Andrés y María José</div>
-        <div class="parents-label">están por descubrir la sorpresa más grande de sus vidas</div>
+        <div class="parents-label" id="parents-label-text">están por descubrir la sorpresa más grande de sus vidas</div>
       </div>
 
       <!-- Ornament -->
@@ -630,17 +630,17 @@
         <div class="detail-card">
           <div class="dc-icon">📅</div>
           <div class="dc-label">Fecha</div>
-          <div class="dc-value">26 de Julio, 2026</div>
+          <div class="dc-value" id="event-date">12 de Julio, 2026</div>
         </div>
         <div class="detail-card">
           <div class="dc-icon">🕐</div>
           <div class="dc-label">Hora</div>
-          <div class="dc-value">2:00 PM</div>
+          <div class="dc-value">3:00 PM</div>
         </div>
         <div class="detail-card full-width">
           <div class="dc-icon">📍</div>
           <div class="dc-label">Lugar</div>
-          <div class="dc-value"><a href="https://maps.app.goo.gl/3zjqm98AYUWxZ7id7" target="_blank" style="color:#555;text-decoration:underline;">Tláhuac — Ver ubicación 📌</a></div>
+          <div class="dc-value"><a href="https://www.google.com/maps/place/Jim%C3%A9nez+Cant%C3%BA+24,+La+Bomba,+56600+Chalco+de+D%C3%ADaz+Covarrubias,+M%C3%A9x." target="_blank" style="color:#555;text-decoration:underline;">Jiménez Cantú 24, Chalco — Ver ubicación 📌</a></div>
         </div>
       </div>
 
@@ -651,13 +651,23 @@
       </div>
 
       <!-- Message -->
-      <div class="message-box">
+        <div class="message-box" id="main-message">
         ¡Ven a descubrir con nosotros si nuestro bebé será niño o niña! Tu presencia hará este momento aún más especial. ¡No faltes!
       </div>
 
+      <!-- Dress code hint -->
+      <div class="message-box" id="dresscode-message" style="background: linear-gradient(135deg, #E8F5FE, #FCE4EC); border-color: rgba(206,147,216,0.2); margin-top: 0;">
+        👗 <strong>¡Tip!</strong> Intenta llevar alguna prenda o accesorio <span style="color:#0288D1;font-weight:700;">azul</span> o <span style="color:#E91E63;font-weight:700;">rosa</span> según lo que creas que será. ¡Así veremos quién adivina!
+      </div>
+
+      <!-- Baby Shower teaser -->
+      <div class="message-box" id="extra-message" style="background: linear-gradient(135deg, #E8F5FE, #F3E5F5); border-color: rgba(79,195,247,0.2); margin-top: 0;">
+        🎁 <strong>¡Y eso no es todo!</strong> El <strong>26 de julio</strong> celebraremos el Baby Shower en el mismo lugar. ¡Te esperamos en ambos eventos!
+      </div>
+
       <!-- Voting Poll -->
-      <div class="poll-section">
-        <div class="poll-title">🤔 ¿Tú qué crees que será?</div>
+      <div class="poll-section" id="poll-section">
+        <div class="poll-title" id="poll-title-text">🤔 ¿Tú qué crees que será?</div>
         <div class="poll-subtitle">¡Vota y descúbrelo en el evento!</div>
         <div class="poll-options">
           <button class="poll-btn" id="vote-nino" onclick="vote('niño')">
@@ -698,16 +708,67 @@
 
 <script>
 // ============================================================
-// 🔒 CONFIGURACIÓN SECRETA
-// Solo la persona que conoce el resultado (doctor, familiar)
-// debe cambiar esta línea. Nadie más debe tocarla.
-// Opciones: "niño", "niña", o "misterio"
-// Con "misterio" no se revela nada — dice que la sorpresa es en el evento.
+// 🔒 CONFIGURACIÓN
+//
+// MODO: "revelacion" o "babyshower"
+//   - "revelacion" = invitación para la revelación de género (12 julio)
+//   - "babyshower" = invitación para el baby shower (26 julio)
+//
+// GENERO: "niño", "niña", o "misterio"
+//   - Solo cambiar cuando ya se sepa el resultado
+//   - En modo "revelacion" déjalo en "misterio"
+//   - En modo "babyshower" pon "niño" o "niña"
 // ============================================================
-const GENERO = "misterio";
+const MODO = "revelacion"; // "revelacion" o "babyshower"
+const GENERO = "misterio"; // "niño", "niña", o "misterio"
 // ============================================================
 
 (function() {
+
+  // === APPLY MODE ===
+  const isShower = MODO === "babyshower";
+
+  // Titles
+  document.getElementById('event-type-text').textContent = isShower
+    ? 'Te invitamos a nuestro' : 'Te invitamos a nuestra';
+  document.getElementById('main-title-text').textContent = isShower
+    ? 'Baby Shower' : 'Revelación de Género';
+  document.getElementById('cursive-text').textContent = isShower
+    ? (GENERO === 'niño' ? '¡Es niño! 💙' : GENERO === 'niña' ? '¡Es niña! 💗' : '¡Celebremos juntos!')
+    : '¿Niño o Niña?';
+  document.getElementById('parents-label-text').textContent = isShower
+    ? 'los invitan a celebrar la llegada de su bebé'
+    : 'están por descubrir la sorpresa más grande de sus vidas';
+
+  // Date
+  document.getElementById('event-date').textContent = isShower
+    ? '26 de Julio, 2026' : '12 de Julio, 2026';
+
+  // Messages
+  const msgBox = document.getElementById('main-message');
+  const extraMsg = document.getElementById('extra-message');
+  const pollSection = document.getElementById('poll-section');
+
+  if (isShower) {
+    // BABY SHOWER: quitar todo lo de revelación
+    msgBox.textContent = '¡Ven a celebrar con nosotros la llegada de nuestro bebé! Tu cariño y presencia harán este día inolvidable.';
+    extraMsg.style.display = 'none';
+    pollSection.style.display = 'none';
+    document.getElementById('dresscode-message').style.display = 'none';
+
+    // Theme colors
+    if (GENERO === 'niño') {
+      document.documentElement.style.setProperty('--cream', '#E1F5FE');
+      document.querySelector('.card-banner').style.background = 'linear-gradient(135deg, #E1F5FE, #B3E5FC, #81D4FA, #4FC3F7)';
+    } else if (GENERO === 'niña') {
+      document.documentElement.style.setProperty('--cream', '#FCE4EC');
+      document.querySelector('.card-banner').style.background = 'linear-gradient(135deg, #FCE4EC, #F8BBD0, #F48FB1, #F06292)';
+    }
+  } else {
+    // REVELACIÓN: quitar todo lo de baby shower
+    msgBox.textContent = '¡Ven a descubrir con nosotros si nuestro bebé será niño o niña! Tu presencia hará este momento aún más especial. ¡No faltes!';
+    extraMsg.style.display = 'none';
+  }
 
   // === BANNER EMOJI ROTATION ===
   const bannerEmojis = ['👶✨','👧💗','👦💙','🍼✨','🎀🎉','👶🌟'];
@@ -739,7 +800,7 @@ const GENERO = "misterio";
   }
 
   // === COUNTDOWN ===
-  const eventDate = new Date('2026-07-26T00:00:00');
+  const eventDate = new Date(isShower ? '2026-07-26T15:00:00' : '2026-07-12T15:00:00');
   function updateCountdown() {
     const now = new Date();
     const diff = eventDate - now;
