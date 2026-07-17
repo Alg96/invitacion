@@ -3,21 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <meta name="theme-color" content="#FCE4EC">
-  <title>🎉 Revelación de Género - Andrés y María José</title>
+  <meta name="theme-color" content="#F5F0E0">
+  <title>🦁 Baby Shower - Evan Elián</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Playfair+Display:wght@400;700;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Playfair+Display:wght@700;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --pink: #F48FB1;
-      --pink-dark: #E91E63;
-      --blue: #4FC3F7;
-      --blue-dark: #0288D1;
-      --purple: #CE93D8;
-      --gold: #FFD700;
-      --cream: #FFF8F0;
+      --safari-green: #6B8E4E;
+      --safari-green-light: #A8D080;
+      --safari-tan: #D4A76A;
+      --safari-tan-light: #F5E6C8;
+      --safari-brown: #8B5E3C;
+      --safari-cream: #FDF8F0;
+      --safari-sky: #87CEEB;
+      --baby-blue: #81D4FA;
+      --baby-blue-dark: #0288D1;
     }
 
     body {
@@ -27,46 +29,45 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      background: var(--cream);
+      background: var(--safari-cream);
       padding: 0;
       overflow-x: hidden;
-      position: relative;
     }
 
-    /* === BACKGROUND PATTERN === */
-    .bg-pattern {
+    /* Background */
+    .bg-safari {
       position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background-image:
-        radial-gradient(circle at 15% 20%, rgba(244,143,177,0.08) 0%, transparent 50%),
-        radial-gradient(circle at 85% 30%, rgba(79,195,247,0.08) 0%, transparent 50%),
-        radial-gradient(circle at 50% 80%, rgba(206,147,216,0.06) 0%, transparent 40%);
+      inset: 0;
+      background:
+        radial-gradient(circle at 20% 80%, rgba(168,208,128,0.1) 0%, transparent 40%),
+        radial-gradient(circle at 80% 20%, rgba(212,167,106,0.1) 0%, transparent 40%),
+        radial-gradient(circle at 50% 50%, rgba(135,206,235,0.05) 0%, transparent 60%);
       pointer-events: none;
       z-index: 0;
     }
 
-    /* === PARTICLES === */
-    .particles {
+    /* Floating animals */
+    .floating-animals {
       position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
+      inset: 0;
       pointer-events: none;
       z-index: 0;
       overflow: hidden;
     }
-    .particles span {
+    .floating-animals span {
       position: absolute;
       display: block;
-      animation: particleFloat linear infinite;
       opacity: 0;
+      animation: animalFloat linear infinite;
     }
-    @keyframes particleFloat {
-      0% { transform: translateY(100vh) rotate(0deg) scale(0.5); opacity: 0; }
-      5% { opacity: 1; }
-      95% { opacity: 1; }
-      100% { transform: translateY(-10vh) rotate(720deg) scale(1); opacity: 0; }
+    @keyframes animalFloat {
+      0% { transform: translateY(100vh) rotate(0deg) scale(0.6); opacity: 0; }
+      5% { opacity: 0.15; }
+      95% { opacity: 0.15; }
+      100% { transform: translateY(-10vh) rotate(360deg) scale(1); opacity: 0; }
     }
 
-    /* === MAIN CARD === */
+    /* Card */
     .card-wrapper {
       width: 100%;
       max-width: 420px;
@@ -77,159 +78,140 @@
 
     .card {
       background: white;
-      border-radius: 32px;
-      padding: 0;
-      box-shadow:
-        0 25px 80px rgba(233,30,99,0.08),
-        0 10px 30px rgba(0,0,0,0.06);
+      border-radius: 28px;
       overflow: hidden;
-      animation: cardEnter 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      box-shadow:
+        0 20px 60px rgba(139,94,60,0.08),
+        0 8px 24px rgba(0,0,0,0.05);
+      animation: cardIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
       opacity: 0;
     }
-
-    @keyframes cardEnter {
-      from { opacity: 0; transform: translateY(40px) scale(0.92); }
+    @keyframes cardIn {
+      from { opacity: 0; transform: translateY(30px) scale(0.94); }
       to { opacity: 1; transform: translateY(0) scale(1); }
     }
 
-    /* Top decorative banner */
+    /* Banner */
     .card-banner {
-      height: 120px;
-      background: linear-gradient(135deg, #FCE4EC 0%, #F8BBD0 30%, #CE93D8 60%, #B3E5FC 100%);
+      height: 130px;
+      background: linear-gradient(135deg, #A8D080 0%, #6B8E4E 40%, #D4A76A 80%, #F5E6C8 100%);
       position: relative;
-      overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
+      overflow: hidden;
     }
-
     .card-banner::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.15'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      background: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='20' cy='20' r='4'/%3E%3Ccircle cx='60' cy='60' r='4'/%3E%3Ccircle cx='60' cy='20' r='2'/%3E%3Ccircle cx='20' cy='60' r='2'/%3E%3C/g%3E%3C/svg%3E");
     }
-
-    .banner-emoji {
-      font-size: 52px;
+    .banner-animals {
+      font-size: 44px;
       position: relative;
       z-index: 1;
       animation: gentleBounce 3s ease-in-out infinite;
-      text-shadow: 0 4px 20px rgba(0,0,0,0.1);
     }
-
     @keyframes gentleBounce {
-      0%, 100% { transform: translateY(0) scale(1); }
-      50% { transform: translateY(-6px) scale(1.05); }
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
     }
 
-    /* Card body */
+    /* Body */
     .card-body {
-      padding: 28px 24px 32px;
+      padding: 28px 22px 32px;
       text-align: center;
     }
 
-    .event-type {
+    .event-label {
       font-size: 11px;
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 3px;
-      color: var(--purple);
+      color: var(--safari-green);
       margin-bottom: 4px;
     }
 
     .main-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 28px;
-      font-weight: 900;
-      color: #333;
+      font-family: 'Fredoka', sans-serif;
+      font-size: 30px;
+      font-weight: 700;
+      color: var(--safari-brown);
       line-height: 1.2;
-      margin-bottom: 6px;
+      margin-bottom: 4px;
     }
 
-    .cursive-accent {
-      font-family: 'Poppins', sans-serif;
-      font-size: 28px;
-      font-weight: 700;
-      background: linear-gradient(135deg, var(--pink-dark), var(--purple));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      display: block;
-      margin: 4px 0 16px;
-    }
-
-    /* Parents section */
-    .parents-section {
-      margin-bottom: 24px;
-    }
-    .parents-name {
+    .baby-name {
       font-family: 'Playfair Display', serif;
-      font-size: 24px;
-      font-weight: 700;
-      color: #444;
-    }
-    .parents-label {
-      font-size: 12px;
-      color: #bbb;
-      margin-top: 2px;
-      font-weight: 400;
+      font-size: 34px;
+      font-weight: 900;
+      color: var(--baby-blue-dark);
+      display: block;
+      margin: 6px 0 4px;
     }
 
-    /* Decorative divider */
-    .ornament {
+    .baby-gender {
+      font-size: 13px;
+      color: var(--safari-tan);
+      font-weight: 500;
+      margin-bottom: 20px;
+    }
+
+    /* Parents */
+    .parents-name {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 20px;
+      font-weight: 600;
+      color: #555;
+      margin-bottom: 2px;
+    }
+    .parents-sub {
+      font-size: 12px;
+      color: #aaa;
+      margin-bottom: 20px;
+    }
+
+    /* Divider */
+    .divider {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 12px;
-      margin: 20px 0;
-      color: #ddd;
+      gap: 10px;
+      margin: 18px 0;
     }
-    .ornament-line {
-      width: 40px;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, #ddd, transparent);
+    .divider-line {
+      width: 35px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--safari-tan-light), transparent);
     }
-    .ornament-icon { font-size: 14px; color: var(--purple); opacity: 0.6; }
+    .divider-icon { font-size: 16px; }
 
-    /* Event details */
+    /* Details grid */
     .details-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 12px;
+      gap: 10px;
       margin-bottom: 20px;
     }
     .detail-card {
-      background: #FAFAFA;
+      background: var(--safari-cream);
       border-radius: 14px;
-      padding: 14px 12px;
-      transition: transform 0.2s;
+      padding: 14px 10px;
+      border: 1px solid rgba(212,167,106,0.15);
     }
-    .detail-card:hover { transform: translateY(-2px); }
-    .detail-card .dc-icon { font-size: 22px; margin-bottom: 6px; }
-    .detail-card .dc-label {
-      font-size: 10px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: #bbb;
-      margin-bottom: 2px;
-    }
-    .detail-card .dc-value {
-      font-size: 13px;
-      font-weight: 600;
-      color: #555;
-    }
-    .detail-card.full-width {
-      grid-column: 1 / -1;
-    }
+    .detail-card .dc-icon { font-size: 20px; margin-bottom: 5px; }
+    .detail-card .dc-label { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: #bbb; }
+    .detail-card .dc-value { font-size: 13px; font-weight: 600; color: #555; margin-top: 2px; }
+    .detail-card.full-width { grid-column: 1 / -1; }
 
     /* Countdown */
     .countdown-section {
-      margin: 24px 0;
-      padding: 20px 16px;
-      background: linear-gradient(135deg, #FFF0F5, #F3E5F5, #E8F5FE);
-      border-radius: 20px;
-      border: 1px solid rgba(206,147,216,0.15);
+      margin: 22px 0;
+      padding: 18px 14px;
+      background: linear-gradient(135deg, #E8F5E9, #F1F8E9, #E1F5FE);
+      border-radius: 18px;
+      border: 1px solid rgba(107,142,78,0.12);
     }
     .countdown-title {
       font-size: 11px;
@@ -237,302 +219,66 @@
       text-transform: uppercase;
       letter-spacing: 2px;
       color: #999;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
     }
     .countdown {
       display: flex;
       justify-content: center;
       gap: 10px;
     }
-    .cd-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
+    .cd-item { display: flex; flex-direction: column; align-items: center; }
     .cd-num {
-      width: 48px;
-      height: 48px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 20px;
-      font-weight: 700;
-      color: white;
-      background: linear-gradient(135deg, var(--pink), var(--purple));
+      width: 46px; height: 46px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 19px; font-weight: 700; color: white;
+      background: linear-gradient(135deg, var(--safari-green), var(--safari-green-light));
       border-radius: 12px;
-      box-shadow: 0 4px 15px rgba(206,147,216,0.3);
+      box-shadow: 0 4px 12px rgba(107,142,78,0.25);
     }
-    .cd-label {
-      font-size: 9px;
-      color: #aaa;
-      margin-top: 5px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      font-weight: 500;
-    }
+    .cd-label { font-size: 9px; color: #aaa; margin-top: 4px; text-transform: uppercase; letter-spacing: 1px; }
 
     /* Message */
     .message-box {
       position: relative;
-      padding: 16px 20px;
+      padding: 16px 18px;
       background: white;
-      border: 1.5px solid rgba(206,147,216,0.2);
-      border-radius: 16px;
-      margin: 20px 0 28px;
-      font-style: italic;
+      border: 1.5px solid rgba(212,167,106,0.2);
+      border-radius: 14px;
+      margin: 18px 0;
       color: #666;
       font-size: 14px;
       line-height: 1.5;
     }
     .message-box::before {
-      content: '"';
+      content: '🌿';
       position: absolute;
-      top: -14px;
-      left: 16px;
-      font-size: 40px;
-      font-family: 'Playfair Display', serif;
-      color: var(--purple);
-      opacity: 0.3;
-      line-height: 1;
+      top: -12px; left: 50%;
+      transform: translateX(-50%);
+      background: white;
+      padding: 0 8px;
     }
 
-    /* === SCRATCH CARD === */
-    .scratch-wrapper {
-      margin-top: 8px;
-    }
-    .scratch-title {
-      font-size: 10px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 3px;
-      color: #ccc;
-      margin-bottom: 14px;
-    }
-
-    .scratch-section {
-      position: relative;
-      margin: 0 auto;
-      width: 100%;
-      height: 200px;
-      border-radius: 20px;
-      overflow: hidden;
-      box-shadow:
-        0 10px 30px rgba(0,0,0,0.1),
-        0 2px 8px rgba(0,0,0,0.06),
-        inset 0 0 0 1px rgba(0,0,0,0.04);
-      touch-action: none;
-      cursor: crosshair;
-    }
-
-    .scratch-result {
-      position: absolute;
-      inset: 0;
+    /* Safari animals strip */
+    .animals-strip {
       display: flex;
-      flex-direction: column;
-      align-items: center;
       justify-content: center;
-      gap: 8px;
-      font-weight: 800;
-      border-radius: 20px;
+      gap: 16px;
+      font-size: 28px;
+      margin: 20px 0;
+      animation: animalWalk 4s ease-in-out infinite;
     }
-    .scratch-result .r-emoji { font-size: 56px; }
-    .scratch-result .r-text { font-size: 36px; font-family: 'Poppins', sans-serif; font-weight: 900; text-shadow: 0 2px 10px rgba(0,0,0,0.15); }
-    .scratch-result .r-sub { font-size: 14px; font-weight: 500; opacity: 0.8; }
-
-    .scratch-result.nino {
-      background: linear-gradient(135deg, #E1F5FE, #B3E5FC, #81D4FA);
-      color: #01579B;
-    }
-    .scratch-result.nina {
-      background: linear-gradient(135deg, #FCE4EC, #F8BBD0, #F48FB1);
-      color: #880E4F;
-    }
-    .scratch-result.misterio {
-      background: linear-gradient(135deg, #F5F5F5, #EEEEEE, #E0E0E0);
-      color: #555;
+    @keyframes animalWalk {
+      0%, 100% { transform: translateX(0); }
+      50% { transform: translateX(5px); }
     }
 
-    #scratch-canvas {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      border-radius: 20px;
-    }
-
-    .scratch-hint {
-      margin-top: 14px;
-      font-size: 13px;
-      color: #aaa;
-      transition: all 0.4s;
-    }
-    .scratch-hint .finger {
-      display: inline-block;
-      animation: fingerWiggle 1.8s ease-in-out infinite;
-    }
-    @keyframes fingerWiggle {
-      0%,100% { transform: translateX(0) rotate(0); }
-      25% { transform: translateX(6px) rotate(5deg); }
-      75% { transform: translateX(-6px) rotate(-5deg); }
-    }
-
-    /* Revealed text */
-    .revealed-msg {
-      display: none;
-      margin-top: 20px;
-      padding: 14px 20px;
-      border-radius: 14px;
-      font-weight: 600;
-      font-size: 15px;
-      animation: revealPop 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .revealed-msg.show { display: block; }
-    .revealed-msg.nino { background: #E1F5FE; color: #01579B; }
-    .revealed-msg.nina { background: #FCE4EC; color: #880E4F; }
-    .revealed-msg.misterio { background: #F5F5F5; color: #555; }
-
-    @keyframes revealPop {
-      from { opacity: 0; transform: scale(0.8) translateY(10px); }
-      to { opacity: 1; transform: scale(1) translateY(0); }
-    }
-
-    /* RSVP section */
+    /* RSVP */
     .rsvp-section {
-      margin-top: 28px;
-      padding-top: 20px;
-      border-top: 1px solid #f0f0f0;
+      margin-top: 24px;
+      padding-top: 18px;
+      border-top: 1px solid #f0ebe0;
     }
-
-    /* === VOTING POLL === */
-    .poll-section {
-      margin-top: 28px;
-      padding: 20px 16px;
-      background: linear-gradient(135deg, #FFF8E1, #FFF3E0);
-      border-radius: 18px;
-      border: 1px solid rgba(255,215,0,0.2);
-    }
-    .poll-title {
-      font-size: 15px;
-      font-weight: 700;
-      color: #555;
-      margin-bottom: 4px;
-    }
-    .poll-subtitle {
-      font-size: 11px;
-      color: #999;
-      margin-bottom: 16px;
-    }
-    .poll-options {
-      display: flex;
-      gap: 12px;
-    }
-    .poll-btn {
-      flex: 1;
-      padding: 14px 10px;
-      border: 2.5px solid #eee;
-      border-radius: 14px;
-      background: white;
-      cursor: pointer;
-      text-align: center;
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-      font-family: 'Poppins', sans-serif;
-    }
-    .poll-btn:active { transform: scale(0.92); }
-    .poll-btn .pb-emoji { font-size: 32px; display: block; margin-bottom: 6px; }
-    .poll-btn .pb-label { font-size: 13px; font-weight: 600; color: #555; }
-    .poll-btn.voted-nino {
-      border-color: var(--blue);
-      background: #E1F5FE;
-      transform: scale(1.05);
-      box-shadow: 0 4px 15px rgba(79,195,247,0.3);
-    }
-    .poll-btn.voted-nina {
-      border-color: var(--pink);
-      background: #FCE4EC;
-      transform: scale(1.05);
-      box-shadow: 0 4px 15px rgba(244,143,177,0.3);
-    }
-    .poll-btn.not-voted { opacity: 0.5; transform: scale(0.95); }
-    .poll-result {
-      display: none;
-      margin-top: 14px;
-      padding: 10px;
-      border-radius: 10px;
-      background: white;
-      text-align: center;
-      font-size: 13px;
-      font-weight: 500;
-      color: #666;
-      animation: revealPop 0.5s ease;
-    }
-    .poll-result.show { display: block; }
-    .poll-bar {
-      height: 8px;
-      border-radius: 4px;
-      background: #eee;
-      margin-top: 8px;
-      overflow: hidden;
-      display: flex;
-    }
-    .poll-bar-blue {
-      height: 100%;
-      background: linear-gradient(90deg, var(--blue), var(--blue-dark));
-      transition: width 0.8s ease;
-    }
-    .poll-bar-pink {
-      height: 100%;
-      background: linear-gradient(90deg, var(--pink), var(--pink-dark));
-      transition: width 0.8s ease;
-    }
-
-    /* === MUSIC BUTTON === */
-    .music-btn {
-      position: fixed;
-      top: 16px;
-      right: 16px;
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      background: white;
-      border: none;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-      font-size: 20px;
-      cursor: pointer;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.2s;
-      animation: cardEnter 1s ease 0.5s both;
-    }
-    .music-btn:hover { transform: scale(1.1); }
-    .music-btn:active { transform: scale(0.9); }
-    .music-btn.playing {
-      animation: musicPulse 1s ease-in-out infinite;
-    }
-    @keyframes musicPulse {
-      0%, 100% { box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-      50% { box-shadow: 0 4px 20px rgba(206,147,216,0.4); }
-    }
-
-    /* === TOUCH SPARKLE === */
-    .sparkle {
-      position: fixed;
-      pointer-events: none;
-      font-size: 20px;
-      z-index: 9998;
-      animation: sparkleAnim 0.8s ease forwards;
-    }
-    @keyframes sparkleAnim {
-      0% { transform: scale(0) rotate(0deg); opacity: 1; }
-      50% { transform: scale(1.2) rotate(180deg); opacity: 0.8; }
-      100% { transform: scale(0) rotate(360deg) translateY(-30px); opacity: 0; }
-    }
-    .rsvp-text {
-      font-size: 12px;
-      color: #999;
-      margin-bottom: 10px;
-    }
+    .rsvp-text { font-size: 12px; color: #999; margin-bottom: 10px; }
     .rsvp-btn {
       display: inline-flex;
       align-items: center;
@@ -550,8 +296,44 @@
       box-shadow: 0 4px 15px rgba(37,211,102,0.3);
       transition: all 0.2s;
     }
-    .rsvp-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(37,211,102,0.4); }
+    .rsvp-btn:hover { transform: translateY(-2px); }
     .rsvp-btn:active { transform: scale(0.96); }
+
+    /* Music btn */
+    .music-btn {
+      position: fixed;
+      top: 16px; right: 16px;
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: white;
+      border: none;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      font-size: 20px;
+      cursor: pointer;
+      z-index: 100;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.2s;
+    }
+    .music-btn:hover { transform: scale(1.1); }
+    .music-btn.playing { animation: pulse 1s ease-in-out infinite; }
+    @keyframes pulse {
+      0%,100% { box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+      50% { box-shadow: 0 4px 20px rgba(107,142,78,0.4); }
+    }
+
+    /* Sparkle */
+    .sparkle {
+      position: fixed;
+      pointer-events: none;
+      font-size: 20px;
+      z-index: 9998;
+      animation: sparkAnim 0.8s ease forwards;
+    }
+    @keyframes sparkAnim {
+      0% { transform: scale(0) rotate(0deg); opacity: 1; }
+      50% { transform: scale(1.2) rotate(180deg); opacity: 0.8; }
+      100% { transform: scale(0) rotate(360deg) translateY(-30px); opacity: 0; }
+    }
 
     /* Footer */
     .footer {
@@ -560,69 +342,43 @@
       position: relative;
       z-index: 1;
     }
-    .footer-text {
-      font-size: 11px;
-      color: #ccc;
-    }
-    .footer-hearts {
-      margin-top: 8px;
-      font-size: 10px;
-      letter-spacing: 4px;
-      opacity: 0.4;
-    }
+    .footer-text { font-size: 11px; color: #ccc; }
+    .footer-animals { margin-top: 6px; font-size: 14px; letter-spacing: 6px; opacity: 0.4; }
 
-    /* Confetti canvas */
-    #confetti-canvas {
-      position: fixed;
-      inset: 0;
-      width: 100vw;
-      height: 100vh;
-      pointer-events: none;
-      z-index: 9999;
-    }
-
-    /* Responsive */
     @media (max-width: 360px) {
-      .card-body { padding: 24px 16px 28px; }
-      .scratch-section { width: 250px; height: 150px; }
-      .main-title { font-size: 24px; }
-      .cursive-accent { font-size: 30px; }
-      .cd-num { width: 42px; height: 42px; font-size: 18px; }
+      .card-body { padding: 22px 16px 28px; }
+      .main-title { font-size: 26px; }
+      .baby-name { font-size: 28px; }
+      .cd-num { width: 40px; height: 40px; font-size: 17px; }
     }
   </style>
 </head>
 <body>
 
-<!-- Music toggle -->
 <button class="music-btn" id="music-btn" onclick="toggleMusic()">🎵</button>
 
-<div class="bg-pattern"></div>
-<div class="particles" id="particles"></div>
+<div class="bg-safari"></div>
+<div class="floating-animals" id="floating-animals"></div>
 
 <div class="card-wrapper">
   <div class="card">
-    <!-- Banner -->
     <div class="card-banner">
-      <span class="banner-emoji" id="banner-emoji">👶✨</span>
+      <span class="banner-animals" id="banner-animals">🦁🌿🦒</span>
     </div>
 
     <div class="card-body">
-      <!-- Header -->
-      <div class="event-type" id="event-type-text">Te invitamos a nuestra</div>
-      <h1 class="main-title" id="main-title-text">Revelación de Género</h1>
-      <span class="cursive-accent" id="cursive-text">¿Niño o Niña?</span>
+      <div class="event-label">Te invitamos al</div>
+      <h1 class="main-title">Baby Shower de</h1>
+      <span class="baby-name">Evan Elián</span>
+      <div class="baby-gender">👦💙 ¡Es niño!</div>
 
-      <!-- Parents -->
-      <div class="parents-section">
-        <div class="parents-name">Andrés y María José</div>
-        <div class="parents-label" id="parents-label-text">están por descubrir la sorpresa más grande de sus vidas</div>
-      </div>
+      <div class="parents-name">Andrés y María José</div>
+      <div class="parents-sub">te invitan a celebrar la llegada de su bebé</div>
 
-      <!-- Ornament -->
-      <div class="ornament">
-        <span class="ornament-line"></span>
-        <span class="ornament-icon">✦</span>
-        <span class="ornament-line"></span>
+      <div class="divider">
+        <span class="divider-line"></span>
+        <span class="divider-icon">🌿</span>
+        <span class="divider-line"></span>
       </div>
 
       <!-- Details -->
@@ -630,12 +386,12 @@
         <div class="detail-card">
           <div class="dc-icon">📅</div>
           <div class="dc-label">Fecha</div>
-          <div class="dc-value" id="event-date">12 de Julio, 2026</div>
+          <div class="dc-value">26 de Julio, 2026</div>
         </div>
         <div class="detail-card">
-          <div class="dc-icon">🕐</div>
+          <div class="dc-icon">🕓</div>
           <div class="dc-label">Hora</div>
-          <div class="dc-value">3:00 PM</div>
+          <div class="dc-value">4:00 PM</div>
         </div>
         <div class="detail-card full-width">
           <div class="dc-icon">📍</div>
@@ -650,48 +406,18 @@
         <div class="countdown" id="countdown"></div>
       </div>
 
+      <!-- Animals strip -->
+      <div class="animals-strip">🦓🐘🦒🦁🐒🌴</div>
+
       <!-- Message -->
-        <div class="message-box" id="main-message">
-        ¡Ven a descubrir con nosotros si nuestro bebé será niño o niña! Tu presencia hará este momento aún más especial. ¡No faltes!
-      </div>
-
-      <!-- Dress code hint -->
-      <div class="message-box" id="dresscode-message" style="background: linear-gradient(135deg, #E8F5FE, #FCE4EC); border-color: rgba(206,147,216,0.2); margin-top: 0;">
-        👗 <strong>¡Tip!</strong> Intenta llevar alguna prenda o accesorio <span style="color:#0288D1;font-weight:700;">azul</span> o <span style="color:#E91E63;font-weight:700;">rosa</span> según lo que creas que será. ¡Así veremos quién adivina!
-      </div>
-
-      <!-- Baby Shower teaser -->
-      <div class="message-box" id="extra-message" style="background: linear-gradient(135deg, #E8F5FE, #F3E5F5); border-color: rgba(79,195,247,0.2); margin-top: 0;">
-        🎁 <strong>¡Y eso no es todo!</strong> El <strong>26 de julio</strong> celebraremos el Baby Shower en el mismo lugar. ¡Te esperamos en ambos eventos!
-      </div>
-
-      <!-- Voting Poll -->
-      <div class="poll-section" id="poll-section">
-        <div class="poll-title" id="poll-title-text">🤔 ¿Tú qué crees que será?</div>
-        <div class="poll-subtitle">¡Vota y descúbrelo en el evento!</div>
-        <div class="poll-options">
-          <button class="poll-btn" id="vote-nino" onclick="vote('niño')">
-            <span class="pb-emoji">👦💙</span>
-            <span class="pb-label">Niño</span>
-          </button>
-          <button class="poll-btn" id="vote-nina" onclick="vote('niña')">
-            <span class="pb-emoji">👧💗</span>
-            <span class="pb-label">Niña</span>
-          </button>
-        </div>
-        <div class="poll-result" id="poll-result">
-          <span id="poll-msg"></span>
-          <div class="poll-bar">
-            <div class="poll-bar-blue" id="poll-bar-blue" style="width:50%"></div>
-            <div class="poll-bar-pink" id="poll-bar-pink" style="width:50%"></div>
-          </div>
-        </div>
+      <div class="message-box">
+        ¡Ven a celebrar con nosotros la próxima llegada de <strong>Evan Elián</strong>! Tu cariño y presencia harán este día aún más especial. ¡Te esperamos con temática de Safari! 🌿🦁
       </div>
 
       <!-- RSVP -->
       <div class="rsvp-section">
         <p class="rsvp-text">¿Nos confirmas tu asistencia?</p>
-        <a class="rsvp-btn" id="rsvp-btn" href="#" onclick="confirmAttendance(event)" target="_blank">
+        <a class="rsvp-btn" href="#" onclick="confirmAttendance(event)">
           💬 Confirmar por WhatsApp
         </a>
       </div>
@@ -700,113 +426,49 @@
 </div>
 
 <div class="footer">
-  <p class="footer-text">Hecho con amor para un momento inolvidable</p>
-  <p class="footer-hearts">💕 💕 💕</p>
+  <p class="footer-text">Hecho con amor para Evan Elián 🌿</p>
+  <p class="footer-animals">🦁🐘🦒🦓🐒</p>
 </div>
 
-<canvas id="confetti-canvas"></canvas>
-
 <script>
-// ============================================================
-// 🔒 CONFIGURACIÓN
-//
-// MODO: "revelacion" o "babyshower"
-//   - "revelacion" = invitación para la revelación de género (12 julio)
-//   - "babyshower" = invitación para el baby shower (26 julio)
-//
-// GENERO: "niño", "niña", o "misterio"
-//   - Solo cambiar cuando ya se sepa el resultado
-//   - En modo "revelacion" déjalo en "misterio"
-//   - En modo "babyshower" pon "niño" o "niña"
-// ============================================================
-const MODO = "revelacion"; // "revelacion" o "babyshower"
-const GENERO = "misterio"; // "niño", "niña", o "misterio"
-// ============================================================
-
 (function() {
-
-  // === APPLY MODE ===
-  const isShower = MODO === "babyshower";
-
-  // Titles
-  document.getElementById('event-type-text').textContent = isShower
-    ? 'Te invitamos a nuestro' : 'Te invitamos a nuestra';
-  document.getElementById('main-title-text').textContent = isShower
-    ? 'Baby Shower' : 'Revelación de Género';
-  document.getElementById('cursive-text').textContent = isShower
-    ? (GENERO === 'niño' ? '¡Es niño! 💙' : GENERO === 'niña' ? '¡Es niña! 💗' : '¡Celebremos juntos!')
-    : '¿Niño o Niña?';
-  document.getElementById('parents-label-text').textContent = isShower
-    ? 'los invitan a celebrar la llegada de su bebé'
-    : 'están por descubrir la sorpresa más grande de sus vidas';
-
-  // Date
-  document.getElementById('event-date').textContent = isShower
-    ? '26 de Julio, 2026' : '12 de Julio, 2026';
-
-  // Messages
-  const msgBox = document.getElementById('main-message');
-  const extraMsg = document.getElementById('extra-message');
-  const pollSection = document.getElementById('poll-section');
-
-  if (isShower) {
-    // BABY SHOWER: quitar todo lo de revelación
-    msgBox.textContent = '¡Ven a celebrar con nosotros la llegada de nuestro bebé! Tu cariño y presencia harán este día inolvidable.';
-    extraMsg.style.display = 'none';
-    pollSection.style.display = 'none';
-    document.getElementById('dresscode-message').style.display = 'none';
-
-    // Theme colors
-    if (GENERO === 'niño') {
-      document.documentElement.style.setProperty('--cream', '#E1F5FE');
-      document.querySelector('.card-banner').style.background = 'linear-gradient(135deg, #E1F5FE, #B3E5FC, #81D4FA, #4FC3F7)';
-    } else if (GENERO === 'niña') {
-      document.documentElement.style.setProperty('--cream', '#FCE4EC');
-      document.querySelector('.card-banner').style.background = 'linear-gradient(135deg, #FCE4EC, #F8BBD0, #F48FB1, #F06292)';
-    }
-  } else {
-    // REVELACIÓN: quitar todo lo de baby shower
-    msgBox.textContent = '¡Ven a descubrir con nosotros si nuestro bebé será niño o niña! Tu presencia hará este momento aún más especial. ¡No faltes!';
-    extraMsg.style.display = 'none';
+  // === FLOATING ANIMALS ===
+  const animals = ['🦁','🐘','🦒','🦓','🐒','🐆','🦏','🐊','🌿','🌴','🍃','🪶'];
+  const container = document.getElementById('floating-animals');
+  for (let i = 0; i < 14; i++) {
+    const span = document.createElement('span');
+    span.textContent = animals[Math.floor(Math.random() * animals.length)];
+    span.style.left = Math.random() * 100 + '%';
+    span.style.fontSize = (16 + Math.random() * 14) + 'px';
+    span.style.animationDuration = (14 + Math.random() * 16) + 's';
+    span.style.animationDelay = (Math.random() * 12) + 's';
+    container.appendChild(span);
   }
 
-  // === BANNER EMOJI ROTATION ===
-  const bannerEmojis = ['👶✨','👧💗','👦💙','🍼✨','🎀🎉','👶🌟'];
-  let emojiIndex = 0;
-  const bannerEl = document.getElementById('banner-emoji');
+  // === BANNER ROTATION ===
+  const bannerSets = ['🦁🌿🦒','🐘🌴🦓','🐒🍃🦏','🦁💙🐘'];
+  let idx = 0;
+  const bannerEl = document.getElementById('banner-animals');
   setInterval(() => {
     bannerEl.style.transition = 'transform 0.3s, opacity 0.3s';
     bannerEl.style.transform = 'scale(0.5)';
     bannerEl.style.opacity = '0';
     setTimeout(() => {
-      emojiIndex = (emojiIndex + 1) % bannerEmojis.length;
-      bannerEl.textContent = bannerEmojis[emojiIndex];
+      idx = (idx + 1) % bannerSets.length;
+      bannerEl.textContent = bannerSets[idx];
       bannerEl.style.transform = 'scale(1)';
       bannerEl.style.opacity = '1';
     }, 300);
-  }, 2500);
-
-  // === FLOATING PARTICLES ===
-  const particleIcons = ['🍼','🧸','⭐','🎀','🌙','✨','💫','🎈','👣','🦋','💝','🌸'];
-  const particlesDiv = document.getElementById('particles');
-  for (let i = 0; i < 15; i++) {
-    const span = document.createElement('span');
-    span.textContent = particleIcons[Math.floor(Math.random() * particleIcons.length)];
-    span.style.left = Math.random() * 100 + '%';
-    span.style.fontSize = (14 + Math.random() * 14) + 'px';
-    span.style.animationDuration = (12 + Math.random() * 18) + 's';
-    span.style.animationDelay = (Math.random() * 15) + 's';
-    particlesDiv.appendChild(span);
-  }
+  }, 3000);
 
   // === COUNTDOWN ===
-  const eventDate = new Date(isShower ? '2026-07-26T15:00:00' : '2026-07-12T15:00:00');
+  const eventDate = new Date('2026-07-26T16:00:00');
   function updateCountdown() {
     const now = new Date();
     const diff = eventDate - now;
     const el = document.getElementById('countdown');
     if (diff <= 0) {
-      el.innerHTML = '<span style="font-size:15px;font-weight:600;color:var(--purple);">🎉 ¡Hoy es el gran día! 🎉</span>';
+      el.innerHTML = '<span style="font-size:15px;font-weight:600;color:var(--safari-green);">🦁 ¡Hoy es el gran día! 🦁</span>';
       return;
     }
     const d = Math.floor(diff / 86400000);
@@ -821,204 +483,44 @@ const GENERO = "misterio"; // "niño", "niña", o "misterio"
   }
   updateCountdown();
   setInterval(updateCountdown, 1000);
-
-  // === CONFETTI ===
-  function fireConfetti() {
-    const c = document.getElementById('confetti-canvas');
-    const cx = c.getContext('2d');
-    c.width = window.innerWidth;
-    c.height = window.innerHeight;
-
-    const colors = GENERO === "niño"
-      ? ['#4FC3F7','#0288D1','#B3E5FC','#81D4FA','#E1F5FE','#BBDEFB','#FFF']
-      : ['#F48FB1','#E91E63','#FCE4EC','#F06292','#FF80AB','#F8BBD0','#FFF'];
-
-    const particles = [];
-    // Burst from center
-    for (let i = 0; i < 250; i++) {
-      const angle = Math.random() * Math.PI * 2;
-      const speed = Math.random() * 14 + 3;
-      particles.push({
-        x: c.width / 2, y: c.height * 0.5,
-        vx: Math.cos(angle) * speed,
-        vy: Math.sin(angle) * speed - 4,
-        size: Math.random() * 9 + 3,
-        color: colors[Math.floor(Math.random() * colors.length)],
-        rot: Math.random() * 360,
-        rotV: (Math.random() - 0.5) * 18,
-        shape: Math.floor(Math.random() * 4), // 0=rect, 1=circle, 2=star, 3=heart
-        gravity: 0.12 + Math.random() * 0.08,
-        drag: 0.98 + Math.random() * 0.015
-      });
-    }
-
-    let frame = 0;
-    const max = 220;
-
-    function draw() {
-      frame++;
-      if (frame > max) { cx.clearRect(0, 0, c.width, c.height); return; }
-      cx.clearRect(0, 0, c.width, c.height);
-
-      for (const p of particles) {
-        p.vx *= p.drag;
-        p.vy += p.gravity;
-        p.x += p.vx;
-        p.y += p.vy;
-        p.rot += p.rotV;
-
-        const alpha = frame > max - 50 ? (max - frame) / 50 : 1;
-        cx.save();
-        cx.translate(p.x, p.y);
-        cx.rotate(p.rot * Math.PI / 180);
-        cx.globalAlpha = alpha;
-        cx.fillStyle = p.color;
-
-        if (p.shape === 0) {
-          cx.fillRect(-p.size/2, -p.size/3, p.size, p.size * 0.6);
-        } else if (p.shape === 1) {
-          cx.beginPath(); cx.arc(0, 0, p.size/2, 0, Math.PI*2); cx.fill();
-        } else if (p.shape === 2) {
-          drawStar(cx, 0, 0, 5, p.size/2, p.size/4);
-        } else {
-          drawHeart(cx, 0, 0, p.size * 0.8);
-        }
-        cx.restore();
-      }
-      requestAnimationFrame(draw);
-    }
-    draw();
-  }
-
-  function drawStar(cx, x, y, spikes, outer, inner) {
-    cx.beginPath();
-    for (let i = 0; i < spikes * 2; i++) {
-      const r = i % 2 === 0 ? outer : inner;
-      const a = (i * Math.PI) / spikes - Math.PI / 2;
-      cx.lineTo(x + Math.cos(a) * r, y + Math.sin(a) * r);
-    }
-    cx.closePath(); cx.fill();
-  }
-
-  function drawHeart(cx, x, y, size) {
-    const s = size / 4;
-    cx.beginPath();
-    cx.moveTo(x, y + s);
-    cx.bezierCurveTo(x, y - s, x - 2*s, y - s, x - 2*s, y);
-    cx.bezierCurveTo(x - 2*s, y + s*1.5, x, y + 2.5*s, x, y + 3*s);
-    cx.bezierCurveTo(x, y + 2.5*s, x + 2*s, y + s*1.5, x + 2*s, y);
-    cx.bezierCurveTo(x + 2*s, y - s, x, y - s, x, y + s);
-    cx.fill();
-  }
-
 })();
 
-// === VOTING POLL ===
-let voted = localStorage.getItem('genderVote');
-if (voted) showVoteResult(voted);
-
-function vote(choice) {
-  if (voted) return;
-  voted = choice;
-  localStorage.setItem('genderVote', choice);
-
-  const ninoBtn = document.getElementById('vote-nino');
-  const ninaBtn = document.getElementById('vote-nina');
-
-  if (choice === 'niño') {
-    ninoBtn.classList.add('voted-nino');
-    ninaBtn.classList.add('not-voted');
-  } else {
-    ninaBtn.classList.add('voted-nina');
-    ninoBtn.classList.add('not-voted');
-  }
-
-  // Simulate random "results" (just for fun, no real backend)
-  setTimeout(() => showVoteResult(choice), 500);
+// === CONFIRM ATTENDANCE ===
+function confirmAttendance(e) {
+  e.preventDefault();
+  const msg = '¡Hola! Confirmo mi asistencia al Baby Shower de Evan Elián 🦁🌿';
+  const url = 'https://wa.me/525591640685?text=' + encodeURIComponent(msg);
+  window.open(url, '_blank');
 }
 
-function showVoteResult(choice) {
-  const result = document.getElementById('poll-result');
-  const msg = document.getElementById('poll-msg');
-  const barBlue = document.getElementById('poll-bar-blue');
-  const barPink = document.getElementById('poll-bar-pink');
-
-  // Generate fun random percentages
-  const seed = (choice === 'niño') ? 55 + Math.floor(Math.random() * 10) : 40 + Math.floor(Math.random() * 10);
-  const bluePercent = choice === 'niño' ? seed : (100 - seed);
-  const pinkPercent = 100 - bluePercent;
-
-  msg.textContent = choice === 'niño'
-    ? '¡Votaste por niño! 💙 Veamos quién tiene razón...'
-    : '¡Votaste por niña! 💗 Veamos quién tiene razón...';
-  barBlue.style.width = bluePercent + '%';
-  barPink.style.width = pinkPercent + '%';
-  result.classList.add('show');
-
-  // Update buttons if reloading
-  const ninoBtn = document.getElementById('vote-nino');
-  const ninaBtn = document.getElementById('vote-nina');
-  if (choice === 'niño') {
-    ninoBtn.classList.add('voted-nino');
-    ninaBtn.classList.add('not-voted');
-  } else {
-    ninaBtn.classList.add('voted-nina');
-    ninoBtn.classList.add('not-voted');
-  }
-}
-
-// === MUSIC (audio file) ===
+// === MUSIC ===
 let musicPlaying = false;
 let audioEl = null;
-
 function toggleMusic() {
   const btn = document.getElementById('music-btn');
-
   if (!audioEl) {
     audioEl = new Audio('musica.mp3');
     audioEl.loop = true;
     audioEl.volume = 0.4;
   }
-
   if (musicPlaying) {
     audioEl.pause();
     btn.textContent = '🎵';
     btn.classList.remove('playing');
   } else {
-    audioEl.play().catch(() => {
-      // Browser blocked autoplay, user needs to tap again
-    });
+    audioEl.play().catch(() => {});
     btn.textContent = '🔊';
     btn.classList.add('playing');
   }
   musicPlaying = !musicPlaying;
 }
 
-function stopMusic() {
-  if (audioEl) { audioEl.pause(); audioEl = null; }
-  musicPlaying = false;
-}
-
-// === CONFIRM ATTENDANCE VIA WHATSAPP ===
-function confirmAttendance(e) {
-  e.preventDefault();
-  const myVote = localStorage.getItem('genderVote');
-  let msg = '¡Hola! Confirmo mi asistencia a la revelación de género';
-  if (myVote === 'niño') {
-    msg += ' y creo que será niño';
-  } else if (myVote === 'niña') {
-    msg += ' y creo que será niña';
-  }
-  const url = 'https://wa.me/525591640685?text=' + encodeURIComponent(msg);
-  window.open(url, '_blank');
-}
-
 // === TOUCH SPARKLES ===
 document.addEventListener('click', function(e) {
-  const sparkles = ['✨','⭐','💫','🌟','💖'];
+  const icons = ['🌿','⭐','🦁','🍃','💙','✨'];
   const spark = document.createElement('div');
   spark.className = 'sparkle';
-  spark.textContent = sparkles[Math.floor(Math.random() * sparkles.length)];
+  spark.textContent = icons[Math.floor(Math.random() * icons.length)];
   spark.style.left = e.clientX - 10 + 'px';
   spark.style.top = e.clientY - 10 + 'px';
   document.body.appendChild(spark);
