@@ -1,635 +1,940 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="no-scroll">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <meta name="theme-color" content="#1a0008">
-  <title>🌺 XVIII — Fany</title>
+  <title>18 años — Fany</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700;1,900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --tehuana-red:     #C0122C;
-      --tehuana-magenta: #D4006A;
-      --tehuana-pink:    #F0437A;
-      --tehuana-yellow:  #F5C518;
-      --tehuana-orange:  #E87C22;
-      --tehuana-purple:  #7B1E6A;
-      --tehuana-black:   #1A0008;
-      --tehuana-cream:   #FDF5E6;
-      --tehuana-gold:    #C8922A;
+      --red:     #C0122C;
+      --magenta: #D4006A;
+      --pink:    #F0437A;
+      --yellow:  #F5C518;
+      --purple:  #7B1E6A;
+      --black:   #12000A;
+      --gold:    #C8922A;
     }
 
+    html { scroll-behavior: smooth; }
+
     body {
+      width: 100%; min-height: 100vh;
       font-family: 'Poppins', sans-serif;
-      min-height: 100vh;
-      min-height: 100dvh;
+      background: #0a0005;
       display: flex;
       flex-direction: column;
       align-items: center;
-      background: var(--tehuana-black);
-      padding: 0;
       overflow-x: hidden;
     }
 
-    /* ── Background floral pattern ── */
-    .bg-pattern {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 0;
-      background:
-        radial-gradient(circle at 10% 20%, rgba(192,18,44,0.18) 0%, transparent 40%),
-        radial-gradient(circle at 90% 80%, rgba(212,0,106,0.18) 0%, transparent 40%),
-        radial-gradient(circle at 50% 50%, rgba(123,30,106,0.12) 0%, transparent 60%);
+    /* Bloquear scroll antes de showDetail */
+    html.no-scroll,
+    html.no-scroll body {
+      overflow: hidden !important;
     }
 
-    /* ── Floating petals ── */
-    .floating-petals {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 0;
-      overflow: hidden;
+    /* ── Partículas de fondo ── */
+    #particles {
+      position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden;
     }
-    .floating-petals span {
-      position: absolute;
-      display: block;
-      opacity: 0;
-      animation: petalFloat linear infinite;
+    #particles span {
+      position: absolute; display: block; opacity: 0;
+      animation: pFloat linear infinite; font-size: 18px;
     }
-    @keyframes petalFloat {
-      0%   { transform: translateY(100vh) rotate(0deg) scale(0.5);  opacity: 0; }
-      5%   { opacity: 0.2; }
-      95%  { opacity: 0.2; }
-      100% { transform: translateY(-10vh) rotate(360deg) scale(1.1); opacity: 0; }
+    @keyframes pFloat {
+      0%   { transform: translateY(110vh) rotate(0deg);   opacity: 0; }
+      6%   { opacity: 0.18; }
+      94%  { opacity: 0.18; }
+      100% { transform: translateY(-10vh) rotate(400deg); opacity: 0; }
     }
 
-    /* ── Card ── */
-    .card-wrapper {
+    /* ══════════════════════════════════════
+       SECCIÓN SLIDESHOW
+    ══════════════════════════════════════ */
+    #slideshow-section {
+      position: relative; z-index: 1;
       width: 100%;
-      max-width: 430px;
-      padding: 24px 14px 40px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .card {
-      background: var(--tehuana-black);
-      border-radius: 24px;
-      overflow: hidden;
-      border: 2px solid var(--tehuana-red);
-      box-shadow:
-        0 0 0 4px rgba(192,18,44,0.15),
-        0 24px 60px rgba(0,0,0,0.7),
-        0 0 80px rgba(212,0,106,0.08);
-      animation: cardIn 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-      opacity: 0;
-    }
-    @keyframes cardIn {
-      from { opacity: 0; transform: translateY(30px) scale(0.93); }
-      to   { opacity: 1; transform: translateY(0)    scale(1); }
-    }
-
-    /* ── Banner ── */
-    .card-banner {
-      position: relative;
-      height: 180px;
-      background: linear-gradient(160deg,
-        #1A0008 0%,
-        #5B0025 30%,
-        var(--tehuana-red) 60%,
-        var(--tehuana-magenta) 100%);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      overflow: hidden;
+      min-height: 100vh;
+      padding: 20px 12px 30px;
+      transition: opacity 0.6s ease;
     }
 
-    /* Bordado SVG decorativo */
-    .banner-border {
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      height: 36px;
-    }
-
-    .banner-flowers {
-      font-size: 52px;
-      position: relative;
-      z-index: 1;
-      animation: sway 4s ease-in-out infinite;
-      line-height: 1;
-    }
-    @keyframes sway {
-      0%,100% { transform: rotate(-3deg) scale(1); }
-      50%      { transform: rotate(3deg) scale(1.06); }
-    }
-    .banner-sub {
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic;
-      font-size: 14px;
-      color: rgba(255,255,255,0.75);
-      margin-top: 6px;
-      letter-spacing: 3px;
-      position: relative;
-      z-index: 1;
-    }
-
-    /* Corner flowers */
-    .corner {
-      position: absolute;
-      font-size: 26px;
-      opacity: 0.55;
-      line-height: 1;
-    }
-    .corner-tl { top: 8px;  left: 10px; }
-    .corner-tr { top: 8px;  right: 10px; transform: scaleX(-1); }
-    .corner-bl { bottom: 40px; left: 10px; transform: scaleY(-1); }
-    .corner-br { bottom: 40px; right: 10px; transform: scale(-1,-1); }
-
-    /* ── Body ── */
-    .card-body {
-      padding: 30px 22px 34px;
-      text-align: center;
-    }
-
-    .event-label {
-      font-size: 10px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 4px;
-      color: var(--tehuana-yellow);
-      margin-bottom: 6px;
-    }
-
-    .main-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic;
-      font-size: 22px;
-      font-weight: 400;
-      color: rgba(255,255,255,0.7);
-      margin-bottom: 2px;
-    }
-
-    .name-number {
-      font-family: 'Playfair Display', serif;
-      font-size: 22px;
-      font-weight: 700;
-      color: var(--tehuana-gold);
-      display: block;
-      letter-spacing: 1px;
-      margin-bottom: 4px;
-    }
-
-    .quinceañera-name {
-      font-family: 'Playfair Display', serif;
-      font-size: 52px;
-      font-weight: 900;
-      background: linear-gradient(135deg, var(--tehuana-pink), var(--tehuana-yellow), var(--tehuana-magenta));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      display: block;
-      line-height: 1.1;
-      margin: 4px 0;
-      filter: drop-shadow(0 2px 8px rgba(240,67,122,0.4));
-    }
-
-    .nickname {
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic;
-      font-size: 16px;
-      color: rgba(255,255,255,0.55);
-      margin-bottom: 18px;
-    }
-
-    /* ── Divider ── */
-    .divider {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      margin: 16px 0;
-    }
-    .divider-line {
-      flex: 1;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--tehuana-red), transparent);
-    }
-    .divider-icon { font-size: 18px; }
-
-    /* ── Details grid ── */
-    .details-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-bottom: 18px;
-    }
-    .detail-card {
-      background: rgba(255,255,255,0.04);
-      border-radius: 14px;
-      padding: 14px 10px;
-      border: 1px solid rgba(192,18,44,0.25);
-      transition: border-color 0.2s;
-    }
-    .detail-card:hover { border-color: rgba(240,67,122,0.5); }
-    .detail-card .dc-icon  { font-size: 20px; margin-bottom: 5px; }
-    .detail-card .dc-label { font-size: 9px; text-transform: uppercase; letter-spacing: 2px; color: var(--tehuana-yellow); opacity: 0.75; }
-    .detail-card .dc-value { font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.85); margin-top: 3px; line-height: 1.4; }
-    .detail-card .dc-sub   { font-size: 10px; color: rgba(255,255,255,0.4); margin-top: 2px; }
-    .detail-card.full-width { grid-column: 1 / -1; }
-    .detail-card a { color: var(--tehuana-pink); text-decoration: none; }
-    .detail-card a:hover { text-decoration: underline; }
-
-    /* ── Schedule ── */
-    .schedule {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 18px;
-    }
-    .sched-item {
-      flex: 1;
-      background: rgba(255,255,255,0.04);
-      border-radius: 14px;
-      padding: 14px 8px;
-      border: 1px solid rgba(192,18,44,0.25);
-      text-align: center;
-    }
-    .sched-item .sc-icon  { font-size: 22px; margin-bottom: 6px; }
-    .sched-item .sc-label { font-size: 9px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--tehuana-yellow); opacity: 0.75; }
-    .sched-item .sc-time  { font-size: 18px; font-weight: 700; color: white; margin: 3px 0 2px; font-family: 'Playfair Display', serif; }
-    .sched-item .sc-name  { font-size: 11px; color: rgba(255,255,255,0.55); }
-
-    /* ── Countdown ── */
-    .countdown-section {
-      margin: 18px 0;
-      padding: 18px 12px;
-      background: rgba(192,18,44,0.08);
+    .stage {
+      position: relative; z-index: 1;
+      width: min(700px, 96vw);
+      aspect-ratio: 16 / 9;
+      background: var(--black);
       border-radius: 18px;
-      border: 1px solid rgba(192,18,44,0.2);
+      border: 2px solid var(--red);
+      overflow: hidden;
+      box-shadow:
+        0 0 0 4px rgba(192,18,44,0.18),
+        0 30px 80px rgba(0,0,0,0.85),
+        0 0 120px rgba(212,0,106,0.12);
     }
-    .countdown-title {
-      font-size: 10px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 2.5px;
-      color: var(--tehuana-yellow);
-      opacity: 0.8;
-      margin-bottom: 12px;
+
+    .stage-bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse at 20% 80%, rgba(192,18,44,0.22) 0%, transparent 55%),
+        radial-gradient(ellipse at 80% 20%, rgba(212,0,106,0.18) 0%, transparent 55%),
+        radial-gradient(ellipse at 50% 50%, rgba(123,30,106,0.14) 0%, transparent 65%);
+      z-index: 0;
     }
-    .countdown {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
+
+    .corner-deco {
+      position: absolute; z-index: 1; opacity: 0.35;
+      width: 80px; height: 80px;
     }
+    .corner-deco.tl { top: 0;    left: 0; }
+    .corner-deco.tr { top: 0;    right: 0;  transform: scaleX(-1); }
+    .corner-deco.bl { bottom: 0; left: 0;   transform: scaleY(-1); }
+    .corner-deco.br { bottom: 0; right: 0;  transform: scale(-1,-1); }
+
+    /* Slides */
+    .slide {
+      position: absolute; inset: 0; z-index: 2;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 6% 8%;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.5s ease;
+    }
+    .slide.active { opacity: 1; pointer-events: auto; }
+
+    .slide .el {
+      opacity: 0; transform: translateY(18px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .slide.active .el { opacity: 1; transform: translateY(0); }
+    .slide.active .el:nth-child(1) { transition-delay: 0.1s; }
+    .slide.active .el:nth-child(2) { transition-delay: 0.35s; }
+    .slide.active .el:nth-child(3) { transition-delay: 0.6s; }
+    .slide.active .el:nth-child(4) { transition-delay: 0.85s; }
+    .slide.active .el:nth-child(5) { transition-delay: 1.1s; }
+    .slide.active .el:nth-child(6) { transition-delay: 1.35s; }
+
+    /* Tipografías slides */
+    .t-label {
+      font-size: clamp(8px, 1.5vw, 11px); font-weight: 600;
+      text-transform: uppercase; letter-spacing: 4px;
+      color: var(--yellow); opacity: 0.85; text-align: center;
+    }
+    .t-script {
+      font-family: 'Cormorant Garamond', serif; font-style: italic;
+      font-size: clamp(14px, 3vw, 22px); font-weight: 300;
+      color: rgba(255,255,255,0.7); text-align: center; line-height: 1.3;
+    }
+    .t-name {
+      font-family: 'Playfair Display', serif; font-weight: 900; font-style: italic;
+      font-size: clamp(38px, 9vw, 72px);
+      background: linear-gradient(135deg, var(--pink) 0%, var(--yellow) 50%, var(--magenta) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      text-align: center; line-height: 1;
+      filter: drop-shadow(0 2px 12px rgba(240,67,122,0.5));
+    }
+    .t-number {
+      font-family: 'Playfair Display', serif; font-weight: 700;
+      font-size: clamp(22px, 5vw, 42px); color: var(--gold);
+      text-align: center; line-height: 1;
+    }
+    .t-big {
+      font-family: 'Playfair Display', serif; font-weight: 900;
+      font-size: clamp(26px, 6vw, 52px); color: white;
+      text-align: center; line-height: 1.1;
+    }
+    .t-body {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(12px, 2.2vw, 17px); color: rgba(255,255,255,0.75);
+      text-align: center; line-height: 1.6;
+    }
+    .t-highlight { color: var(--pink); font-style: italic; }
+    .t-gold { color: var(--gold); }
+
+    .divider {
+      display: flex; align-items: center; gap: 10px;
+      width: 100%; max-width: 320px; margin: 6px auto;
+    }
+    .divider-line { flex: 1; height: 1px; background: linear-gradient(90deg, transparent, rgba(192,18,44,0.6), transparent); }
+    .divider-icon { font-size: 14px; }
+
+    .info-row { display: flex; gap: 10px; width: 100%; max-width: 420px; justify-content: center; }
+    .info-box {
+      flex: 1; background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(192,18,44,0.3); border-radius: 10px;
+      padding: 10px 8px; text-align: center;
+    }
+    .info-box .ib-icon  { font-size: clamp(16px, 3vw, 22px); margin-bottom: 4px; }
+    .info-box .ib-label { font-size: clamp(7px, 1.2vw, 9px); text-transform: uppercase; letter-spacing: 1.5px; color: var(--yellow); opacity: 0.7; }
+    .info-box .ib-val   { font-size: clamp(9px, 1.8vw, 13px); font-weight: 600; color: white; margin-top: 2px; line-height: 1.3; }
+    .info-box .ib-sub   { font-size: clamp(7px, 1.2vw, 10px); color: rgba(255,255,255,0.4); margin-top: 2px; }
+    .info-box a { color: var(--pink); text-decoration: none; }
+    .info-box a:hover { text-decoration: underline; }
+
+    .countdown { display: flex; gap: 8px; justify-content: center; }
     .cd-item { display: flex; flex-direction: column; align-items: center; }
     .cd-num {
-      width: 50px; height: 50px;
+      width: clamp(36px, 7vw, 52px); height: clamp(36px, 7vw, 52px);
       display: flex; align-items: center; justify-content: center;
-      font-size: 20px; font-weight: 700; color: white;
-      background: linear-gradient(135deg, var(--tehuana-red), var(--tehuana-magenta));
-      border-radius: 12px;
-      box-shadow: 0 4px 14px rgba(192,18,44,0.4);
       font-family: 'Playfair Display', serif;
+      font-size: clamp(14px, 3vw, 20px); font-weight: 700; color: white;
+      background: linear-gradient(135deg, var(--red), var(--magenta));
+      border-radius: 10px; box-shadow: 0 4px 14px rgba(192,18,44,0.4);
     }
-    .cd-label { font-size: 9px; color: rgba(255,255,255,0.4); margin-top: 4px; text-transform: uppercase; letter-spacing: 1px; }
-
-    /* ── Message box ── */
-    .message-box {
-      position: relative;
-      padding: 18px 16px;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(240,67,122,0.2);
-      border-radius: 14px;
-      margin: 18px 0;
-      color: rgba(255,255,255,0.7);
-      font-size: 13.5px;
-      line-height: 1.65;
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 15px;
-    }
-    .message-box::before {
-      content: '🌺';
-      position: absolute;
-      top: -14px; left: 50%;
-      transform: translateX(-50%);
-      background: var(--tehuana-black);
-      padding: 0 8px;
-      font-size: 20px;
+    .cd-label {
+      font-size: clamp(7px, 1.2vw, 9px); color: rgba(255,255,255,0.4);
+      margin-top: 3px; text-transform: uppercase; letter-spacing: 0.5px;
     }
 
-    /* ── Flower strip ── */
-    .flower-strip {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      font-size: 24px;
-      margin: 18px 0 6px;
-      animation: floralSway 5s ease-in-out infinite;
+    .tehuana-figure {
+      animation: tehuanaSway 4s ease-in-out infinite;
+      filter: drop-shadow(0 4px 18px rgba(212,0,106,0.6));
     }
-    @keyframes floralSway {
-      0%,100% { transform: scale(1); }
-      50%      { transform: scale(1.04) translateY(-2px); }
+    @keyframes tehuanaSway {
+      0%,100% { transform: rotate(-2deg) scale(1); }
+      50%      { transform: rotate(2deg) scale(1.05); }
     }
 
-    /* ── RSVP ── */
-    .rsvp-section {
-      margin-top: 22px;
-      padding-top: 18px;
-      border-top: 1px solid rgba(192,18,44,0.2);
-    }
-    .rsvp-text { font-size: 12px; color: rgba(255,255,255,0.45); margin-bottom: 12px; }
-    .rsvp-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 13px 28px;
+    .wa-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: clamp(9px,1.8vw,13px) clamp(16px,3.5vw,28px);
       background: linear-gradient(135deg, #25D366, #128C7E);
-      color: white;
-      border: none;
-      border-radius: 50px;
-      font-size: 14px;
-      font-weight: 600;
-      font-family: 'Poppins', sans-serif;
-      cursor: pointer;
-      text-decoration: none;
-      box-shadow: 0 4px 18px rgba(37,211,102,0.35);
+      color: white; border: none; border-radius: 50px;
+      font-size: clamp(11px, 2vw, 14px); font-weight: 600;
+      font-family: 'Poppins', sans-serif; cursor: pointer;
+      text-decoration: none; box-shadow: 0 4px 18px rgba(37,211,102,0.4);
       transition: all 0.2s;
     }
-    .rsvp-btn:hover  { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(37,211,102,0.4); }
-    .rsvp-btn:active { transform: scale(0.96); }
+    .wa-btn:hover  { transform: translateY(-2px); }
+    .wa-btn:active { transform: scale(0.96); }
 
-    /* ── Music button ── */
-    .music-btn {
-      position: fixed;
-      top: 16px; right: 16px;
-      width: 44px; height: 44px;
-      border-radius: 50%;
-      background: rgba(26,0,8,0.85);
-      border: 1.5px solid var(--tehuana-red);
-      box-shadow: 0 4px 16px rgba(0,0,0,0.4);
-      font-size: 20px;
-      cursor: pointer;
-      z-index: 100;
+    .progress-bar {
+      position: absolute; bottom: 0; left: 0; height: 3px; z-index: 10;
+      background: linear-gradient(90deg, var(--red), var(--magenta), var(--yellow));
+      transition: width 0.1s linear; border-radius: 0 2px 0 0;
+    }
+
+    .dots {
+      position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%);
+      display: flex; gap: 6px; z-index: 10;
+    }
+    .dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: rgba(255,255,255,0.25); cursor: pointer;
+      transition: background 0.3s, transform 0.3s;
+    }
+    .dot.active { background: var(--yellow); transform: scale(1.3); }
+
+    .nav-btn {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      z-index: 10; background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15); border-radius: 50%;
+      width: clamp(28px, 5vw, 38px); height: clamp(28px, 5vw, 38px);
       display: flex; align-items: center; justify-content: center;
-      transition: all 0.2s;
-      backdrop-filter: blur(6px);
+      cursor: pointer; color: white; font-size: clamp(10px, 2vw, 14px);
+      transition: background 0.2s; user-select: none;
     }
-    .music-btn:hover { transform: scale(1.1); }
-    .music-btn.playing { animation: pulse 1.2s ease-in-out infinite; }
-    @keyframes pulse {
-      0%,100% { box-shadow: 0 4px 16px rgba(0,0,0,0.4); }
-      50%      { box-shadow: 0 4px 24px rgba(192,18,44,0.6); }
+    .nav-btn:hover { background: rgba(192,18,44,0.35); }
+    .nav-btn.prev { left: 10px; }
+    .nav-btn.next { right: 10px; }
+
+    /* Hint "ver todo" debajo del stage */
+    .hint-scroll {
+      margin-top: 16px;
+      font-size: 12px; color: rgba(255,255,255,0.35);
+      display: flex; align-items: center; gap: 6px;
+      cursor: pointer; transition: color 0.2s;
+      user-select: none;
+    }
+    .hint-scroll:hover { color: rgba(255,255,255,0.7); }
+    .hint-arrow { animation: bounce 1.5s ease-in-out infinite; display: inline-block; }
+    @keyframes bounce {
+      0%,100% { transform: translateY(0); }
+      50%      { transform: translateY(4px); }
     }
 
-    /* ── Sparkle ── */
-    .sparkle {
-      position: fixed;
+    /* ══════════════════════════════════════
+       SECCIÓN DETALLE (lista completa)
+    ══════════════════════════════════════ */
+    #detail-section {
+      position: relative; z-index: 1;
+      width: min(700px, 96vw);
+      padding: 0;
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.7s ease, transform 0.7s ease, max-height 0s ease 0s;
       pointer-events: none;
-      font-size: 22px;
-      z-index: 9998;
-      animation: sparkAnim 0.9s ease forwards;
+    }
+    #detail-section.visible {
+      opacity: 1; transform: translateY(0); pointer-events: auto;
+      max-height: none;
+      overflow: visible;
+      padding: 0 0 60px;
+    }
+
+    /* Separador entre ambas secciones */
+    .section-sep {
+      width: min(700px, 96vw);
+      display: flex; align-items: center; gap: 12px;
+      padding: 0;
+      max-height: 0;
+      overflow: hidden;
+      position: relative; z-index: 1;
+      opacity: 0;
+      transition: opacity 0.7s ease 0.2s, max-height 0.5s ease, padding 0.5s ease;
+    }
+    .section-sep.visible {
+      opacity: 1;
+      max-height: 60px;
+      padding: 10px 0 20px;
+    }
+    .section-sep-line { flex: 1; height: 1px; background: linear-gradient(90deg, transparent, rgba(192,18,44,0.4), transparent); }
+    .section-sep-text { font-size: 11px; color: rgba(255,255,255,0.3); letter-spacing: 2px; white-space: nowrap; }
+
+    /* Card de detalle */
+    .detail-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(192,18,44,0.2);
+      border-radius: 16px;
+      padding: 20px 18px;
+      margin-bottom: 12px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease, border-color 0.2s;
+    }
+    .detail-card.visible { opacity: 1; transform: translateY(0); }
+    .detail-card:hover { border-color: rgba(240,67,122,0.35); }
+
+    .detail-card.center {
+      flex-direction: column; align-items: center; text-align: center;
+    }
+
+    .dc-icon-wrap {
+      width: 44px; height: 44px; flex-shrink: 0;
+      background: rgba(192,18,44,0.15);
+      border: 1px solid rgba(192,18,44,0.25);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px;
+    }
+    .dc-content { flex: 1; }
+    .dc-label {
+      font-size: 9px; text-transform: uppercase; letter-spacing: 2px;
+      color: var(--yellow); opacity: 0.75; margin-bottom: 4px;
+    }
+    .dc-value {
+      font-size: 15px; font-weight: 600; color: white; line-height: 1.3;
+    }
+    .dc-sub {
+      font-size: 12px; color: rgba(255,255,255,0.45); margin-top: 4px; line-height: 1.4;
+    }
+    .dc-sub a { color: var(--pink); text-decoration: none; }
+    .dc-sub a:hover { text-decoration: underline; }
+
+    /* Header detalle */
+    .detail-header {
+      text-align: center; padding: 10px 0 20px;
+      opacity: 0; transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .detail-header.visible { opacity: 1; transform: translateY(0); }
+    .detail-header-name {
+      font-family: 'Playfair Display', serif; font-weight: 900; font-style: italic;
+      font-size: clamp(32px, 8vw, 56px);
+      background: linear-gradient(135deg, var(--pink), var(--yellow), var(--magenta));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      filter: drop-shadow(0 2px 10px rgba(240,67,122,0.4));
+      line-height: 1;
+    }
+    .detail-header-sub {
+      font-family: 'Cormorant Garamond', serif; font-style: italic;
+      font-size: 15px; color: rgba(255,255,255,0.5); margin-top: 4px;
+    }
+
+    /* Countdown en detalle */
+    .countdown-detail {
+      display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;
+    }
+    .cd2-item { display: flex; flex-direction: column; align-items: center; }
+    .cd2-num {
+      width: 52px; height: 52px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 20px; font-weight: 700; color: white;
+      background: linear-gradient(135deg, var(--red), var(--magenta));
+      border-radius: 12px; box-shadow: 0 4px 14px rgba(192,18,44,0.4);
+    }
+    .cd2-label {
+      font-size: 9px; color: rgba(255,255,255,0.4);
+      margin-top: 4px; text-transform: uppercase; letter-spacing: 1px;
+    }
+
+    /* Horario en detalle (2 columnas) */
+    .schedule-row { display: flex; gap: 12px; margin-bottom: 12px; }
+    .sched-box {
+      flex: 1; background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(192,18,44,0.2); border-radius: 14px;
+      padding: 16px 10px; text-align: center;
+      opacity: 0; transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .sched-box.visible { opacity: 1; transform: translateY(0); }
+    .sched-box:hover { border-color: rgba(240,67,122,0.35); }
+    .sb-icon  { font-size: 22px; margin-bottom: 6px; }
+    .sb-label { font-size: 9px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--yellow); opacity: 0.7; }
+    .sb-time  { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: white; margin: 4px 0 2px; }
+    .sb-name  { font-size: 11px; color: rgba(255,255,255,0.5); }
+
+    /* Botón volver al inicio */
+    .back-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(192,18,44,0.3);
+      border-radius: 50px; padding: 10px 20px;
+      color: rgba(255,255,255,0.6); font-size: 12px; cursor: pointer;
+      transition: all 0.2s; text-decoration: none; margin-top: 8px;
+    }
+    .back-btn:hover { background: rgba(192,18,44,0.2); color: white; }
+
+    /* Divider detalle */
+    .detail-divider {
+      display: flex; align-items: center; gap: 10px;
+      margin: 4px 0 12px;
+    }
+    .detail-divider-line { flex: 1; height: 1px; background: linear-gradient(90deg, transparent, rgba(192,18,44,0.3), transparent); }
+    .detail-divider-icon { font-size: 16px; opacity: 0.6; }
+
+    /* Sparkle */
+    .sparkle {
+      position: fixed; pointer-events: none; font-size: 20px; z-index: 9999;
+      animation: sparkAnim 0.8s ease forwards;
     }
     @keyframes sparkAnim {
-      0%   { transform: scale(0) rotate(0deg); opacity: 1; }
-      50%  { transform: scale(1.3) rotate(180deg); opacity: 0.9; }
-      100% { transform: scale(0) rotate(360deg) translateY(-30px); opacity: 0; }
+      0%   { transform: scale(0) rotate(0deg);    opacity: 1; }
+      50%  { transform: scale(1.4) rotate(180deg); opacity: 0.9; }
+      100% { transform: scale(0) rotate(360deg) translateY(-28px); opacity: 0; }
     }
 
-    /* ── Footer ── */
-    .footer {
-      text-align: center;
-      padding: 16px 16px 36px;
-      position: relative;
-      z-index: 1;
-    }
-    .footer-text    { font-size: 11px; color: rgba(255,255,255,0.2); }
-    .footer-flowers { margin-top: 6px; font-size: 16px; letter-spacing: 6px; opacity: 0.3; }
-
-    @media (max-width: 360px) {
-      .quinceañera-name { font-size: 42px; }
-      .card-body { padding: 22px 16px 28px; }
-      .cd-num { width: 42px; height: 42px; font-size: 17px; }
-    }
+    .gap-xs { margin: 3px 0; }
+    .gap-sm { margin: 6px 0; }
+    .gap-md { margin: 10px 0; }
   </style>
 </head>
 <body>
 
-<button class="music-btn" id="music-btn" onclick="toggleMusic()">🎵</button>
+<div id="particles"></div>
 
-<div class="bg-pattern"></div>
-<div class="floating-petals" id="floating-petals"></div>
+<!-- ════════════════════════════════════════
+     SECCIÓN 1: SLIDESHOW
+════════════════════════════════════════ -->
+<div id="slideshow-section">
+  <div class="stage" id="stage">
+    <div class="stage-bg"></div>
 
-<div class="card-wrapper">
-  <div class="card">
+    <!-- Esquinas decorativas -->
+    <svg class="corner-deco tl" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0 80 Q0 0 80 0" stroke="rgba(192,18,44,0.6)" stroke-width="1.5" fill="none"/>
+      <circle cx="10" cy="10" r="3"   fill="#F5C518" opacity="0.7"/>
+      <circle cx="20" cy="6"  r="2"   fill="#D4006A" opacity="0.7"/>
+      <circle cx="6"  cy="20" r="2"   fill="#F0437A" opacity="0.7"/>
+      <circle cx="30" cy="4"  r="1.5" fill="#F5C518" opacity="0.5"/>
+      <circle cx="4"  cy="30" r="1.5" fill="#F5C518" opacity="0.5"/>
+    </svg>
+    <svg class="corner-deco tr" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0 80 Q0 0 80 0" stroke="rgba(192,18,44,0.6)" stroke-width="1.5" fill="none"/>
+      <circle cx="10" cy="10" r="3"   fill="#F5C518" opacity="0.7"/>
+      <circle cx="20" cy="6"  r="2"   fill="#D4006A" opacity="0.7"/>
+      <circle cx="6"  cy="20" r="2"   fill="#F0437A" opacity="0.7"/>
+      <circle cx="30" cy="4"  r="1.5" fill="#F5C518" opacity="0.5"/>
+      <circle cx="4"  cy="30" r="1.5" fill="#F5C518" opacity="0.5"/>
+    </svg>
+    <svg class="corner-deco bl" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0 80 Q0 0 80 0" stroke="rgba(192,18,44,0.6)" stroke-width="1.5" fill="none"/>
+      <circle cx="10" cy="10" r="3" fill="#F5C518" opacity="0.7"/>
+      <circle cx="20" cy="6"  r="2" fill="#D4006A" opacity="0.7"/>
+      <circle cx="6"  cy="20" r="2" fill="#F0437A" opacity="0.7"/>
+    </svg>
+    <svg class="corner-deco br" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0 80 Q0 0 80 0" stroke="rgba(192,18,44,0.6)" stroke-width="1.5" fill="none"/>
+      <circle cx="10" cy="10" r="3" fill="#F5C518" opacity="0.7"/>
+      <circle cx="20" cy="6"  r="2" fill="#D4006A" opacity="0.7"/>
+      <circle cx="6"  cy="20" r="2" fill="#F0437A" opacity="0.7"/>
+    </svg>
 
-    <!-- Banner -->
-    <div class="card-banner">
-      <span class="corner corner-tl">🌸</span>
-      <span class="corner corner-tr">🌸</span>
-      <span class="corner corner-bl">🌼</span>
-      <span class="corner corner-br">🌼</span>
-
-      <div class="banner-flowers" id="banner-flowers">🌺🌸🌼</div>
-      <div class="banner-sub">· mis dieciocho años ·</div>
-
-      <!-- Borde ondulado de flores -->
-      <svg class="banner-border" viewBox="0 0 430 36" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M0,18 C30,0 60,36 90,18 C120,0 150,36 180,18 C210,0 240,36 270,18 C300,0 330,36 360,18 C390,0 420,36 430,18 L430,36 L0,36 Z"
-              fill="#1A0008"/>
-        <path d="M0,22 C30,4 60,40 90,22 C120,4 150,40 180,22 C210,4 240,40 270,22 C300,4 330,40 360,22 C390,4 420,40 430,22"
-              fill="none" stroke="rgba(192,18,44,0.5)" stroke-width="1.5"/>
-      </svg>
+    <!-- SLIDE 1 — Apertura -->
+    <div class="slide active" id="slide-0">
+      <div class="el t-label">Con todo el amor, te invitamos a</div>
+      <div class="gap-sm"></div>
+      <div class="el">
+        <svg class="tehuana-figure" width="70" height="88" viewBox="0 0 90 115" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="45" cy="14" rx="23" ry="9" fill="#D4006A"/>
+          <circle cx="27" cy="13" r="5.5" fill="#F5C518"/>
+          <circle cx="35" cy="7"  r="4"   fill="#C0122C"/>
+          <circle cx="45" cy="5"  r="5.5" fill="#F5C518"/>
+          <circle cx="55" cy="7"  r="4"   fill="#C0122C"/>
+          <circle cx="63" cy="13" r="5.5" fill="#F5C518"/>
+          <circle cx="45" cy="14" r="3.5" fill="#F0437A"/>
+          <ellipse cx="45" cy="27" rx="10" ry="11" fill="#F5CBA7"/>
+          <ellipse cx="45" cy="23" rx="11" ry="7"  fill="#2C1A0E"/>
+          <path d="M35 27 Q29 40 31 53" stroke="#2C1A0E" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+          <path d="M55 27 Q61 40 59 53" stroke="#2C1A0E" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+          <circle cx="31" cy="53" r="4.5" fill="#D4006A"/>
+          <circle cx="59" cy="53" r="4.5" fill="#D4006A"/>
+          <rect x="40" y="37" width="10" height="8" rx="2" fill="#F5CBA7"/>
+          <path d="M24 45 Q45 41 66 45 L69 74 Q45 78 21 74 Z" fill="#C0122C"/>
+          <circle cx="38" cy="55" r="4"   fill="#F5C518" opacity="0.95"/>
+          <circle cx="45" cy="51" r="4.5" fill="#F0437A" opacity="0.95"/>
+          <circle cx="52" cy="55" r="4"   fill="#F5C518" opacity="0.95"/>
+          <circle cx="37" cy="66" r="3"   fill="#F0437A" opacity="0.85"/>
+          <circle cx="45" cy="69" r="3.5" fill="#F5C518" opacity="0.85"/>
+          <circle cx="53" cy="66" r="3"   fill="#F0437A" opacity="0.85"/>
+          <path d="M21 74 Q8 83 6 115 L84 115 Q82 83 69 74 Z" fill="#7B1E6A"/>
+          <circle cx="22" cy="87" r="4.5" fill="#F5C518" opacity="0.9"/>
+          <circle cx="33" cy="98" r="5"   fill="#F0437A" opacity="0.9"/>
+          <circle cx="45" cy="90" r="4.5" fill="#F5C518" opacity="0.9"/>
+          <circle cx="57" cy="98" r="5"   fill="#F0437A" opacity="0.9"/>
+          <circle cx="68" cy="87" r="4.5" fill="#F5C518" opacity="0.9"/>
+          <path d="M24 49 Q13 60 17 74" stroke="#F5CBA7" stroke-width="7" stroke-linecap="round" fill="none"/>
+          <path d="M66 49 Q77 60 73 74" stroke="#F5CBA7" stroke-width="7" stroke-linecap="round" fill="none"/>
+        </svg>
+      </div>
+      <div class="gap-xs"></div>
+      <div class="el t-script">la celebración de sus</div>
+      <div class="el t-number">XVIII Años</div>
     </div>
 
-    <!-- Body -->
-    <div class="card-body">
-
-      <div class="event-label">✨ Con todo el amor te invitamos a celebrar ✨</div>
-
-      <p class="main-title">los</p>
-      <span class="name-number">XVIII Años</span>
-      <span class="quinceañera-name">Estefany</span>
-      <div class="nickname">— a quien todos amamos como "Fany" —</div>
-
-      <div class="divider">
-        <span class="divider-line"></span>
-        <span class="divider-icon">🌺</span>
-        <span class="divider-line"></span>
+    <!-- SLIDE 2 — Nombre -->
+    <div class="slide" id="slide-1">
+      <div class="el t-script">Esta noche brilla</div>
+      <div class="gap-xs"></div>
+      <div class="el t-name">Estefany</div>
+      <div class="gap-xs"></div>
+      <div class="el">
+        <div class="divider"><span class="divider-line"></span><span class="divider-icon">🌺</span><span class="divider-line"></span></div>
       </div>
+      <div class="gap-xs"></div>
+      <div class="el t-script">— a quien todos amamos como <span class="t-highlight">"Fany"</span> —</div>
+      <div class="gap-xs"></div>
+      <div class="el t-body" style="font-size:clamp(10px,1.8vw,14px);color:rgba(255,255,255,0.5);">
+        con los colores de la <span class="t-gold">Tehuana</span> · flores · bordados · magia del Istmo
+      </div>
+    </div>
 
-      <!-- Fecha y lugar -->
-      <div class="details-grid">
-        <div class="detail-card">
-          <div class="dc-icon">📅</div>
-          <div class="dc-label">Fecha</div>
-          <div class="dc-value">Sábado 26 de Septiembre</div>
+    <!-- SLIDE 3 — Fecha -->
+    <div class="slide" id="slide-2">
+      <div class="el t-label">Marca tu calendario</div>
+      <div class="gap-sm"></div>
+      <div class="el t-big">Sábado</div>
+      <div class="el" style="line-height:1;">
+        <span style="font-family:'Playfair Display',serif;font-size:clamp(52px,13vw,100px);font-weight:900;
+                     background:linear-gradient(135deg,#F0437A,#F5C518,#D4006A);
+                     -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+                     filter:drop-shadow(0 2px 14px rgba(240,67,122,0.6));line-height:1;">26</span>
+      </div>
+      <div class="el t-big" style="font-size:clamp(18px,4vw,30px);color:rgba(255,255,255,0.7);">de Septiembre · 2026</div>
+      <div class="gap-sm"></div>
+      <div class="el">
+        <div class="divider"><span class="divider-line"></span><span class="divider-icon">💃</span><span class="divider-line"></span></div>
+      </div>
+    </div>
+
+    <!-- SLIDE 4 — Horario y lugar -->
+    <div class="slide" id="slide-3">
+      <div class="el t-label">Programa del día</div>
+      <div class="gap-sm"></div>
+      <div class="el info-row">
+        <div class="info-box">
+          <div class="ib-icon">⛪</div>
+          <div class="ib-label">Misa</div>
+          <div class="ib-val">4:00 PM</div>
+          <div class="ib-sub">Ceremonia religiosa</div>
         </div>
-        <div class="detail-card">
-          <div class="dc-icon">🌟</div>
-          <div class="dc-label">Edición especial</div>
-          <div class="dc-value">18 años</div>
-          <div class="dc-sub">¡Solo se cumple una vez!</div>
+        <div class="info-box">
+          <div class="ib-icon">🍽️</div>
+          <div class="ib-label">Comida</div>
+          <div class="ib-val">5:00 PM</div>
+          <div class="ib-sub">Festejo y celebración</div>
         </div>
-        <div class="detail-card full-width">
-          <div class="dc-icon">📍</div>
-          <div class="dc-label">Ubicación</div>
-          <div class="dc-value">
-            <a href="https://maps.app.goo.gl/PbookBGNg7T8nYSg7" target="_blank">
-              Ver en Google Maps 🗺️
-            </a>
+      </div>
+      <div class="gap-sm"></div>
+      <div class="el info-row">
+        <div class="info-box" style="flex:unset;width:100%;max-width:340px;">
+          <div class="ib-icon">📍</div>
+          <div class="ib-label">Mismo lugar para todo el evento</div>
+          <div class="ib-val" style="margin-top:5px;">La misa y la comida son en la misma ubicación</div>
+          <div class="ib-sub" style="margin-top:6px;">
+            <a href="https://maps.app.goo.gl/PbookBGNg7T8nYSg7" target="_blank">Ver en Google Maps 🗺️</a>
           </div>
         </div>
       </div>
+    </div>
 
-      <!-- Horario -->
-      <div class="schedule">
-        <div class="sched-item">
-          <div class="sc-icon">⛪</div>
-          <div class="sc-label">Misa</div>
-          <div class="sc-time">4:00 PM</div>
-          <div class="sc-name">Ceremonia religiosa</div>
-        </div>
-        <div class="sched-item">
-          <div class="sc-icon">🍽️</div>
-          <div class="sc-label">Festejo</div>
-          <div class="sc-time">5:00 PM</div>
-          <div class="sc-name">Comida y celebración</div>
-        </div>
+    <!-- SLIDE 5 — Cuenta regresiva -->
+    <div class="slide" id="slide-4">
+      <div class="el t-label">🕯️ Faltan para el gran día</div>
+      <div class="gap-md"></div>
+      <div class="el countdown" id="countdown"></div>
+      <div class="gap-md"></div>
+      <div class="el">
+        <div class="divider"><span class="divider-line"></span><span class="divider-icon">🌺</span><span class="divider-line"></span></div>
       </div>
+      <div class="gap-xs"></div>
+      <div class="el t-script">¡Aparta la fecha!</div>
+    </div>
 
-      <!-- Countdown -->
-      <div class="countdown-section">
-        <div class="countdown-title">🕯️ Faltan para el gran día</div>
-        <div class="countdown" id="countdown"></div>
+    <!-- SLIDE 6 — Confirmación (última) -->
+    <div class="slide" id="slide-5">
+      <div class="el t-script">Tu presencia hace este día</div>
+      <div class="el t-big">Inolvidable</div>
+      <div class="gap-sm"></div>
+      <div class="el">
+        <div class="divider"><span class="divider-line"></span><span class="divider-icon">💃</span><span class="divider-line"></span></div>
       </div>
-
-      <!-- Flower strip -->
-      <div class="flower-strip">🌹🌺🌸🌼🌻🌸🌺🌹</div>
-
-      <!-- Message -->
-      <div class="message-box">
-        Con el corazón lleno de alegría, te invitamos a vivir y compartir este momento tan especial con nuestra <strong style="color:var(--tehuana-pink)">Fany</strong>.<br><br>
-        Ella brillará esa noche con los colores de la <em>Tehuana</em> — flores, bordados y toda la magia del Istmo. 🌺<br><br>
-        Tu presencia hará este día aún más memorable. ¡Te esperamos! 🎉
-      </div>
-
-      <!-- RSVP -->
-      <div class="rsvp-section">
-        <p class="rsvp-text">¿Nos confirmas tu asistencia?</p>
-        <a class="rsvp-btn" href="#" onclick="confirmAttendance(event)">
+      <div class="gap-sm"></div>
+      <div class="el t-body">¿Nos confirmas tu asistencia?</div>
+      <div class="gap-sm"></div>
+      <div class="el">
+        <a class="wa-btn" href="#" onclick="confirmAttendance(event)">
           💬 Confirmar por WhatsApp
         </a>
       </div>
-
+      <div class="gap-sm"></div>
+      <div class="el t-label" style="opacity:0.4;font-size:clamp(7px,1.2vw,9px);">Con amor para Fany 🌺</div>
     </div>
+
+    <!-- Barra de progreso -->
+    <div class="progress-bar" id="progress-bar"></div>
+
+    <!-- Dots -->
+    <div class="dots" id="dots"></div>
+
+    <!-- Flechas -->
+    <button class="nav-btn prev" onclick="changeSlide(-1)">&#8592;</button>
+    <button class="nav-btn next" id="next-btn" onclick="changeSlide(1)">&#8594;</button>
+  </div>
+
+  <!-- Hint para bajar -->
+  <div class="hint-scroll" id="hint-scroll" onclick="showDetail()">
+    Ver toda la invitación &nbsp;<span class="hint-arrow">&#8595;</span>
   </div>
 </div>
 
-<div class="footer">
-  <p class="footer-text">Con amor para Fany en su gran noche 🌺</p>
-  <p class="footer-flowers">🌹🌺🌸🌼🌻</p>
+<!-- ════════════════════════════════════════
+     SEPARADOR
+════════════════════════════════════════ -->
+<div class="section-sep" id="section-sep">
+  <span class="section-sep-line"></span>
+  <span class="section-sep-text">✦ invitación completa ✦</span>
+  <span class="section-sep-line"></span>
 </div>
 
+<!-- ════════════════════════════════════════
+     SECCIÓN 2: DETALLE EN LISTA
+════════════════════════════════════════ -->
+<div id="detail-section">
+
+  <!-- Header -->
+  <div class="detail-header" id="dh-header">
+    <div style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:4px;color:var(--yellow);opacity:0.8;margin-bottom:8px;">
+      ✨ 18 años de ✨
+    </div>
+    <div class="detail-header-name">Estefany</div>
+    <div class="detail-header-sub">— Fany —</div>
+  </div>
+
+  <div class="detail-divider">
+    <span class="detail-divider-line"></span>
+    <span class="detail-divider-icon">💃</span>
+    <span class="detail-divider-line"></span>
+  </div>
+
+  <!-- Fecha -->
+  <div class="detail-card" id="dc-fecha">
+    <div class="dc-icon-wrap">📅</div>
+    <div class="dc-content">
+      <div class="dc-label">Fecha</div>
+      <div class="dc-value">Sábado 26 de Septiembre, 2026</div>
+      <div class="dc-sub">¡Aparta el día desde ya!</div>
+    </div>
+  </div>
+
+  <!-- Horario -->
+  <div class="schedule-row">
+    <div class="sched-box" id="dc-misa">
+      <div class="sb-icon">⛪</div>
+      <div class="sb-label">Misa</div>
+      <div class="sb-time">4:00 PM</div>
+      <div class="sb-name">Ceremonia religiosa</div>
+    </div>
+    <div class="sched-box" id="dc-comida">
+      <div class="sb-icon">🍽️</div>
+      <div class="sb-label">Comida</div>
+      <div class="sb-time">5:00 PM</div>
+      <div class="sb-name">Festejo y celebración</div>
+    </div>
+  </div>
+
+  <!-- Ubicación -->
+  <div class="detail-card" id="dc-lugar">
+    <div class="dc-icon-wrap">📍</div>
+    <div class="dc-content">
+      <div class="dc-label">Ubicación — mismo lugar para todo el evento</div>
+      <div class="dc-value">La misa y la comida son en la misma ubicación</div>
+      <div class="dc-sub" style="margin-top:8px;">
+        <a href="https://maps.app.goo.gl/PbookBGNg7T8nYSg7" target="_blank">
+          📌 Abrir en Google Maps
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Vestido -->
+  <div class="detail-card" id="dc-vestido">
+    <div class="dc-icon-wrap">💃</div>
+    <div class="dc-content">
+      <div class="dc-label">Tema de la noche</div>
+      <div class="dc-value">Vestido Tehuana</div>
+      <div class="dc-sub">Fany lucirá los colores y bordados típicos del Istmo de Tehuantepec</div>
+    </div>
+  </div>
+
+  <!-- Cuenta regresiva -->
+  <div class="detail-card center" id="dc-countdown" style="padding:20px;">
+    <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:3px;color:var(--yellow);opacity:0.8;margin-bottom:14px;">
+      🕯️ Cuenta regresiva
+    </div>
+    <div class="countdown-detail" id="countdown2"></div>
+  </div>
+
+  <!-- Mensaje -->
+  <div class="detail-card center" id="dc-mensaje" style="padding:22px 18px;">
+    <div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:16px;color:rgba(255,255,255,0.7);line-height:1.7;text-align:center;">
+      Con el corazón lleno de alegría, te invitamos a compartir este momento tan especial
+      con nuestra <span style="color:var(--pink);font-weight:600;">Fany</span>.<br><br>
+      Ella brillará con los colores de la <span style="color:var(--gold);">Tehuana</span> —
+      flores, bordados y toda la magia del Istmo. 🌺<br><br>
+      Tu presencia hará este día inolvidable. ¡Te esperamos!
+    </div>
+  </div>
+
+  <!-- Botón WhatsApp -->
+  <div class="detail-card center" id="dc-rsvp">
+    <div style="font-size:12px;color:rgba(255,255,255,0.45);margin-bottom:14px;">
+      ¿Nos confirmas tu asistencia?
+    </div>
+    <a class="wa-btn" href="#" onclick="confirmAttendance(event)" style="font-size:14px;padding:13px 30px;">
+      💬 Confirmar por WhatsApp
+    </a>
+  </div>
+
+  <!-- Volver arriba -->
+  <div style="text-align:center;margin-top:16px;">
+    <a class="back-btn" onclick="scrollToTop()">&#8593; Volver a la invitación</a>
+  </div>
+
+</div><!-- /detail-section -->
+
 <script>
+// ── Partículas ──
 (function() {
-  // === FLOATING PETALS ===
-  const petals = ['🌺','🌸','🌼','🌹','✨','🌻','🌷','💮','🏵️'];
-  const container = document.getElementById('floating-petals');
-  for (let i = 0; i < 16; i++) {
-    const span = document.createElement('span');
-    span.textContent = petals[Math.floor(Math.random() * petals.length)];
-    span.style.left = Math.random() * 100 + '%';
-    span.style.fontSize = (14 + Math.random() * 16) + 'px';
-    span.style.animationDuration = (16 + Math.random() * 18) + 's';
-    span.style.animationDelay  = (Math.random() * 14) + 's';
-    container.appendChild(span);
+  const items = ['💃','🌺','✨','💫','🌸','⭐','🌼'];
+  const c = document.getElementById('particles');
+  for (let i = 0; i < 18; i++) {
+    const s = document.createElement('span');
+    s.textContent = items[Math.floor(Math.random() * items.length)];
+    s.style.left = Math.random() * 100 + '%';
+    s.style.fontSize = (12 + Math.random() * 14) + 'px';
+    s.style.animationDuration = (20 + Math.random() * 20) + 's';
+    s.style.animationDelay   = (Math.random() * 18) + 's';
+    c.appendChild(s);
+  }
+})();
+
+// ── Slides ──
+const TOTAL    = 6;
+const DURATION = 5000;
+let current   = 0;
+let timer     = null;
+let progTimer = null;
+let progStart = null;
+let detailShown = false;
+
+const slides = Array.from({length: TOTAL}, (_, i) => document.getElementById('slide-' + i));
+const dotsEl = document.getElementById('dots');
+const bar    = document.getElementById('progress-bar');
+
+slides.forEach((_, i) => {
+  const d = document.createElement('div');
+  d.className = 'dot' + (i === 0 ? ' active' : '');
+  d.onclick = () => goTo(i);
+  dotsEl.appendChild(d);
+});
+
+function goTo(n) {
+  const isLast = (n >= TOTAL);
+  slides[current].classList.remove('active');
+  dotsEl.children[current].classList.remove('active');
+
+  if (isLast) {
+    // Terminó la última slide → mostrar detalle
+    current = TOTAL - 1; // mantener última activa visualmente
+    slides[current].classList.add('active');
+    dotsEl.children[current].classList.add('active');
+    clearTimeout(timer);
+    cancelAnimationFrame(progTimer);
+    bar.style.width = '100%';
+    setTimeout(() => showDetail(), 800);
+    return;
   }
 
-  // === BANNER ROTATION ===
-  const bannerSets = ['🌺🌸🌼','🌹✨🌸','🌼💮🌺','🏵️🌸🌹','🌺🌻🌼'];
-  let idx = 0;
-  const bannerEl = document.getElementById('banner-flowers');
-  setInterval(() => {
-    bannerEl.style.transition = 'transform 0.3s, opacity 0.3s';
-    bannerEl.style.transform  = 'scale(0.5)';
-    bannerEl.style.opacity    = '0';
-    setTimeout(() => {
-      idx = (idx + 1) % bannerSets.length;
-      bannerEl.textContent     = bannerSets[idx];
-      bannerEl.style.transform = 'scale(1)';
-      bannerEl.style.opacity   = '1';
-    }, 300);
-  }, 3000);
+  current = ((n % TOTAL) + TOTAL) % TOTAL;
+  slides[current].classList.add('active');
+  dotsEl.children[current].classList.add('active');
+  resetTimer();
+}
 
-  // === COUNTDOWN ===
-  // Sabado 26 de septiembre — misa a las 4 PM
-  const eventDate = new Date('2026-09-26T16:00:00');
-  function updateCountdown() {
-    const now  = new Date();
-    const diff = eventDate - now;
-    const el   = document.getElementById('countdown');
+function changeSlide(dir) {
+  goTo(current + dir);
+}
+
+function resetTimer() {
+  clearTimeout(timer);
+  cancelAnimationFrame(progTimer);
+  bar.style.width = '0%';
+  progStart = performance.now();
+  animateBar();
+  // Si es la última slide, al acabar mostramos detalle en vez de loop
+  timer = setTimeout(() => {
+    if (current === TOTAL - 1) {
+      bar.style.width = '100%';
+      setTimeout(() => showDetail(), 400);
+    } else {
+      goTo(current + 1);
+    }
+  }, DURATION);
+}
+
+function animateBar() {
+  progTimer = requestAnimationFrame(function tick(now) {
+    const elapsed = now - progStart;
+    const pct = Math.min((elapsed / DURATION) * 100, 100);
+    bar.style.width = pct + '%';
+    if (pct < 100) progTimer = requestAnimationFrame(tick);
+  });
+}
+
+resetTimer();
+
+// ── Mostrar sección detalle ──
+function showDetail() {
+  if (detailShown) return;
+  detailShown = true;
+
+  // Desbloquear scroll
+  document.documentElement.classList.remove('no-scroll');
+  document.body.style.overflowX = 'hidden';
+
+  const sep    = document.getElementById('section-sep');
+  const detail = document.getElementById('detail-section');
+
+  sep.classList.add('visible');
+  detail.classList.add('visible');
+
+  // Scroll suave hasta la sección detalle
+  setTimeout(() => {
+    sep.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 200);
+
+  // Animar cada card con delay escalonado
+  const targets = [
+    'dh-header','dc-fecha','dc-misa','dc-comida',
+    'dc-lugar','dc-vestido','dc-countdown','dc-mensaje','dc-rsvp'
+  ];
+  targets.forEach((id, i) => {
+    setTimeout(() => {
+      const el = document.getElementById(id);
+      if (el) el.classList.add('visible');
+    }, 300 + i * 120);
+  });
+}
+
+function scrollToTop() {
+  document.getElementById('slideshow-section').scrollIntoView({ behavior: 'smooth' });
+}
+
+// ── Countdown (slideshow) ──
+const eventDate = new Date('2026-09-26T16:00:00');
+function updateCountdown() {
+  const diff = eventDate - new Date();
+  [document.getElementById('countdown'), document.getElementById('countdown2')].forEach((el, idx) => {
+    if (!el) return;
     if (diff <= 0) {
-      el.innerHTML = '<span style="font-size:14px;font-weight:600;color:var(--tehuana-pink);">🌺 ¡Hoy es el gran día de Fany! 🌺</span>';
+      el.innerHTML = '<span style="color:var(--pink);font-weight:600;font-size:14px;">🌺 ¡Hoy es el gran día! 🌺</span>';
       return;
     }
     const d = Math.floor(diff / 86400000);
     const h = Math.floor((diff % 86400000) / 3600000);
     const m = Math.floor((diff % 3600000)  / 60000);
     const s = Math.floor((diff % 60000)    / 1000);
-    el.innerHTML = `
-      <div class="cd-item"><div class="cd-num">${d}</div><div class="cd-label">Días</div></div>
-      <div class="cd-item"><div class="cd-num">${h}</div><div class="cd-label">Hrs</div></div>
-      <div class="cd-item"><div class="cd-num">${m}</div><div class="cd-label">Min</div></div>
-      <div class="cd-item"><div class="cd-num">${s}</div><div class="cd-label">Seg</div></div>`;
-  }
-  updateCountdown();
-  setInterval(updateCountdown, 1000);
-})();
+    if (idx === 0) {
+      el.innerHTML = `
+        <div class="cd-item"><div class="cd-num">${d}</div><div class="cd-label">Días</div></div>
+        <div class="cd-item"><div class="cd-num">${h}</div><div class="cd-label">Hrs</div></div>
+        <div class="cd-item"><div class="cd-num">${m}</div><div class="cd-label">Min</div></div>
+        <div class="cd-item"><div class="cd-num">${s}</div><div class="cd-label">Seg</div></div>`;
+    } else {
+      el.innerHTML = `
+        <div class="cd2-item"><div class="cd2-num">${d}</div><div class="cd2-label">Días</div></div>
+        <div class="cd2-item"><div class="cd2-num">${h}</div><div class="cd2-label">Hrs</div></div>
+        <div class="cd2-item"><div class="cd2-num">${m}</div><div class="cd2-label">Min</div></div>
+        <div class="cd2-item"><div class="cd2-num">${s}</div><div class="cd2-label">Seg</div></div>`;
+    }
+  });
+}
+updateCountdown();
+setInterval(updateCountdown, 1000);
 
-// === CONFIRM ATTENDANCE ===
+// ── WhatsApp ──
 function confirmAttendance(e) {
   e.preventDefault();
   const msg = '¡Hola! Confirmo mi asistencia a los 18 años de Fany (Estefany) 🌺🎉 ¡Ahí estaré!';
-  const url = 'https://wa.me/525543821086?text=' + encodeURIComponent(msg);
-  window.open(url, '_blank');
+  window.open('https://wa.me/525543821086?text=' + encodeURIComponent(msg), '_blank');
 }
 
-// === MUSIC ===
-let musicPlaying = false;
-let audioEl = null;
-function toggleMusic() {
-  const btn = document.getElementById('music-btn');
-  if (!audioEl) {
-    audioEl = new Audio('musica.mp3');
-    audioEl.loop   = true;
-    audioEl.volume = 0.4;
-  }
-  if (musicPlaying) {
-    audioEl.pause();
-    btn.textContent = '🎵';
-    btn.classList.remove('playing');
-  } else {
-    audioEl.play().catch(() => {});
-    btn.textContent = '🔊';
-    btn.classList.add('playing');
-  }
-  musicPlaying = !musicPlaying;
-}
-
-// === CLICK SPARKLES ===
+// ── Sparkles ──
 document.addEventListener('click', function(e) {
-  const icons = ['🌺','🌸','✨','🌼','💫','🌹','⭐','🏵️'];
+  if (e.target.closest('.nav-btn,.dot,.wa-btn,.back-btn,.hint-scroll')) return;
+  const icons = ['💃','🌺','✨','💫','🌸','⭐'];
   const spark = document.createElement('div');
-  spark.className   = 'sparkle';
+  spark.className = 'sparkle';
   spark.textContent = icons[Math.floor(Math.random() * icons.length)];
-  spark.style.left  = e.clientX - 11 + 'px';
-  spark.style.top   = e.clientY - 11 + 'px';
+  spark.style.left = e.clientX - 10 + 'px';
+  spark.style.top  = e.clientY - 10 + 'px';
   document.body.appendChild(spark);
-  setTimeout(() => spark.remove(), 900);
+  setTimeout(() => spark.remove(), 800);
+});
+
+// ── Swipe táctil ──
+let touchX = null;
+document.getElementById('stage').addEventListener('touchstart', e => { touchX = e.touches[0].clientX; });
+document.getElementById('stage').addEventListener('touchend',   e => {
+  if (touchX === null) return;
+  const dx = e.changedTouches[0].clientX - touchX;
+  if (Math.abs(dx) > 40) changeSlide(dx < 0 ? 1 : -1);
+  touchX = null;
 });
 </script>
 </body>
